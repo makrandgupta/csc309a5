@@ -1,0 +1,23 @@
+Post your schedule here (times you can't meet).
+
+Kevan
+M 11am-1, 3-4
+T none
+W 11am-1, 3-4, 6-9
+R 6-7
+F 11am-1, 3-4
+
+Zane
+M 2-3
+T 2-3, 4-6
+W 2-3, 6-9
+R 1-3, 4-5, 6-7
+F 2-3
+
+Makrand
+M none
+T 8am-9
+W 12-2, 8-10
+R 1-3, 7-9
+F 11am-2, 8-10
+
