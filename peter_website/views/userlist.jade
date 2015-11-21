@@ -1,0 +1,29 @@
+extend layout
+block userlink
+	a(href="/user/" + id)#thumbuser
+		p.
+			#{username}
+	a(href="/user/" + id)
+		img(src='/' + avatar)#thumbavatar
+	br
+	a(href="/logout").
+		Log out
+
+block content
+	h2.
+		Welcome #{username}!!!
+	table(class="sortable")
+		thead
+			tr
+				th.User email
+				th.Display name
+		tbody
+			each user in users
+				tr
+					td: a(href="/user/" + user._id): button.link.
+						#{user.email}
+					td: a(href="/user/" + user._id): button.link.
+						#{user.username}
+		
+block script
+	script(src='/sorttable.js')

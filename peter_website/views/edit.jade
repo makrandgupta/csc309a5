@@ -1,0 +1,64 @@
+extend layout
+block userlink
+	a(href="/user/" + clientid)#thumbuser
+		p.
+			#{clientUsername}
+	img(src='/' + clientAvatar)#thumbavatar
+	br
+	a(href="/logout").
+		Log out
+
+block content
+	p#message.
+		#{message}
+	a(href="/user/" + id)
+		p.
+			<= Back
+	form(action="/upload/"+id method="post" enctype="multipart/form-data")
+		label(for="file").
+			Change avatar: 
+		input(type="file" name="avatar")#file
+		button(type="submit").
+			Submit
+	
+	h2.float.
+		Profile
+	#profile
+		img(src="/" + avatar)#avatar
+		#titles
+			p.
+				Display Name: 
+			p.
+				Description: 
+		form(action="/infoedit/"+id method="post")#values
+			p
+				input(type="text" name="username")
+			p
+				textarea(rows="4" cols="50" name="description")
+			button(type="submit").
+				Submit
+	if (clientAdmin == 2 && admin == 0)
+		a(href="/admin/" + id): button.
+			Make admin
+	if (clientAdmin == 2 && admin == 1)
+		a(href="/admin/" + id): button.
+			Remove admin
+	
+	h2.
+		Change Password
+	#titles
+		p.
+			Old password
+		p.
+			New password
+		p.
+			Confirm new password
+	form(action="/password/"+id method="post")#values
+			p
+				input(type="password" name="oldPassword")
+			p
+				input(type="password" name="newPassword")
+			p
+				input(type="password" name="confirmPassword")
+			button(type="submit").
+				Submit

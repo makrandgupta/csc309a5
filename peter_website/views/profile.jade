@@ -1,0 +1,52 @@
+extend layout
+block userlink
+	a(href="/user/" + clientid)#thumbuser
+		p.
+			#{clientUsername}
+	img(src='/' + clientAvatar)#thumbavatar
+	br
+	a(href="/logout").
+		Log out
+
+block content
+	a(href="/userlist")
+		p.
+			<= Back
+	h2.float.
+		Profile
+	if (clientid == id || clientAdmin == 2 || (clientAdmin == 1 && admin == 0))
+		a(href="/edit/" + id).
+			(edit)
+	#profile
+		img(src="/" + avatar)#avatar
+		#titles
+			p.
+				email: 
+			p.
+				Display Name: 
+			p.
+				Description: 
+		#values
+			p.
+				#{email}
+			p.
+				#{username}
+			p.
+				#{description}
+	if (admin != 2 && (clientid == id || clientAdmin == 2 || (clientAdmin == 1 && admin == 0)))
+		a(href="/delete/" + id): button.
+			Delete profile
+	
+	if (clientAdmin == 2 || (clientAdmin == 1 && admin == 0))
+		p.
+			Last logged in from IP #{ip}
+		#views
+			h2.
+				#{username}'s Page views
+			each view in views
+				p
+					a(href=view.path).
+						#{view.path)
+					| : #{view.numViews) views
+block script
+	script(src='/profile.js')

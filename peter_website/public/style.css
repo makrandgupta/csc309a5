@@ -1,0 +1,79 @@
+table {
+border-collapse: collapse;
+}
+
+table, th, td {
+border: 1px solid black;
+clear: left;
+}
+
+table tr:nth-child(odd) td{
+background-color: #E0E0E0;
+}
+
+#signupForm, #loginForm {
+display: none;
+}
+
+button.link {
+background: none;
+border: none;
+cursor: pointer;
+}
+
+#message {
+color: red;
+}
+
+#avatar {
+max-width: 200px;
+max-height: 200px;
+float: left;
+clear: left;
+}
+
+.float {
+float: left;
+}
+
+p {
+white-space: pre-wrap;
+white-space: -moz-pre-wrap;
+word-wrap: break-word;
+}
+
+.clear{
+clear: left;
+}
+
+#profile, #views {
+clear: left;
+overflow: auto;
+}
+
+#titles, #values {
+float: left;
+margin: 10px;
+}
+
+#values {
+width: 500px;
+}
+
+#userlink {
+float: right;
+}
+
+#thumbavatar {
+display: inline-block;
+max-width: 50px;
+max-height: 50px;
+}
+
+#thumbuser {
+margin: 10px;
+display: inline-block;
+position: relative;
+top: 50%;
+transform: translateY(-50%);
+}

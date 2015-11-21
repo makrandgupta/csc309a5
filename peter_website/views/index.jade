@@ -1,0 +1,46 @@
+extend layout
+block content
+	p#message.
+		#{message}
+	#signinButtons
+		button#login.
+			Login
+		button#signup.
+			Sign up
+	
+	#loginForm
+		button.back.
+			Back
+		form(action="/login" method="post")
+			h2.
+				Login
+			p.
+				Email
+			input(type="text" name="loginEmail")
+			p.
+				Password
+			input(type="password" name="loginPassword")
+			br
+			button(type="submit").
+				Submit
+	
+	#signupForm
+		button.back.
+			Back
+		form(action="/signup" method="post")
+			h2.
+				Signup
+			p.
+				Email
+			input(type="text" name="signupEmail")
+			p.
+				Password
+			input(type="password" name="signupPassword")
+			p.
+				Confirm Password
+			input(type="password" name="confirmPassword")
+			br
+			button(type="submit").
+				Submit
+block script
+	script(src='/index.js')
