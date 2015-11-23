@@ -1,0 +1,31 @@
+<!-- views/index.ejs -->
+<!doctype html>
+<html>
+<head>
+	<% include /partials/head %>
+</head>
+<body>
+<div class="container">
+	<header>
+		<% include /partials/header %>
+	</header>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Email</th>
+				<th>Display Name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% users.forEach(function(user){%>
+			<tr>
+				<td><%= user.local.email%></td>
+				<td><%= user.local.displayName%></td>
+			</tr>
+			<%});%>
+		</tbody>
+	</table>
+	
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!-- views/profile.ejs -->
+<!doctype html>
+<html>
+<head>
+	<% include /partials/head %>
+</head>
+<body>
+<div class="container">
+	<header>
+		<% include /partials/header %>
+	</header>
+	<%
+	if(typeof viewUser !=="undefined"){
+		if(user !== viewUser){
+			if(user.local.accountType === "superAdmin")
+				var superAdminControls = true;
+			if(user.local.accountType === "admin")
+				var adminControls = true;
+		}
+		user = viewUser;
+	}%>
+
+	<div class="page-header text-center">
+		<h1><%= user.local.displayName%></h1>
+	</div>
+
+	<div class="row">
+	
+		<!-- LOCAL INFORMATION -->
+		<div class="row col-md-2 col-md-offset-1">
+		<img src="<%= user.local.picture%>" class="img-responsive" style="max-height:200px;">
+		</div>
+		<div class="row col-md-8 col-md-offset-4">
+			<span></span>
+			<div class="row col-md-4 col-md-offset-2">
+				<h3><span class="fa fa-user"></span> </h3>
+				<p>
+					<strong>Email</strong>: <%= user.local.email %><br>
+					<strong>Description</strong>: <%= user.local.description %><br>	
+				</p>
+				
+				<%if(superAdminControls === true){%>
+					<%=admin.local.displayName%>
+				<%}%>
+
+			</div>
+		</div>
+
+	</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/"><span class="glyphicon glyphicon-user"></span> Userify</a>
+		</div>
+	<div>
+		<% if(typeof user !== "undefined"){%>
+		<ul class="nav navbar-nav">
+			<li><a href="/users">Home</a></li>
+			<li><a href="/edit/<%= user._id%>">Edit Profile</a></li>
+		</ul>
+		<%}%>	
+		<ul class="nav navbar-nav navbar-right">
+		<% if(typeof user !== "undefined"){%>
+			<li><img src="<%= user.local.picture%>" class="img-responsive img-circle" style="max-height:40px; padding-top:10px;"></li>
+			<li><a href="/profile">Hello 
+			<% if(typeof user.local.displayName !== "undefined" || user.local.displayName !== ''){%> 
+				<%=user.local.displayName%>
+			<%} if(user.local.displayName === '') {%>
+				<%=user.local.email%>
+			<%}%>!</a></li>
+			<li><a href="/logout">Logout</a></li> 
+		<% } else { %>
+			<li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+			<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+		<%}%>	
+      </ul>
+    </div>
+  </div>
+</nav>
+  
