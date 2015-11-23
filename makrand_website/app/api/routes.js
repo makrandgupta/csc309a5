@@ -1,6 +1,6 @@
 // app/routes.js
 
-var User = require('./models/user');
+var User = require('./../models/user');
 var request = require('request');
 var multer= require('multer');
 var fs = require('fs');
