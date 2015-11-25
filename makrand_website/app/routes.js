@@ -18,7 +18,7 @@ function isLoggedIn(req, res, next) {
     res.redirect('/');
 }
 
-module.exports = function(app) {
+module.exports = function(app, passport) {
 
     app.get('/', function(req, res) {
 
