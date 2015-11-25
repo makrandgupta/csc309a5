@@ -70,16 +70,7 @@ module.exports = function(app, passport) {
     //app.use('/api/reservation-requests', require('./api/reservation-request'));
     //app.use('/api/products', require('./api/product'));
     //app.use('/api/things', require('./api/thing'));
-    app.use('/api/users', isLoggedIn, require('./api/user'));
+    app.use('/users', isLoggedIn, require('./api/user'));
 
     //app.use('/auth', require('./auth'));
-
-
-
-
-    // All other routes should redirect to the index.html
-    app.route('/*')
-        .get(function(req, res) {
-            res.sendfile(app.get('appPath') + '/index.html');
-        });
 };
