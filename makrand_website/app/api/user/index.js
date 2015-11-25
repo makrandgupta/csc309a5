@@ -35,6 +35,7 @@ var upload = multer({
 
 router.get('/', userController.allUsers);
 router.get('/me', userController.me);
+router.get('/edit/me', userController.editMe);
 router.get('/:id', userController.singleUser); //merge /profile into
 router.get('/edit/:id', userController.editUser); //remove internal api reference
 router.post('/', userController.create);

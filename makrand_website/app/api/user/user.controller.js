@@ -33,6 +33,17 @@ exports.me = function (req, res) {
     });
 };
 
+/*
+* Edit logged in user
+* */
+
+exports.editMe = function (req, res) {
+    res.render('edit.ejs', {
+        user: req.user,
+        editUser: req.user
+    });
+};
+
 
 /*
 * Get single user information
