@@ -11,16 +11,7 @@ var multer= require('multer');
 
 var router = express.Router();
 
-// router middleware to make sure user is logged in
-function isLoggedIn(req, res, next) {
 
-    // if user is authenticated in the session, carry on
-    if (req.isAuthenticated())
-        return next();
-
-    // if they aren't redirect them to the home page
-    res.redirect('/');
-}
 
 //router middleware to check if the user is an admin
 function isAdmin(req, res, next){
@@ -42,7 +33,6 @@ var upload = multer({
 
 //basic user endpoints
 
-router.all(isLoggedIn);
 router.get('/', userController.allUsers);
 router.get('/me', userController.me);
 router.get('/:id', userController.singleUser); //merge /profile into

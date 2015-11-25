@@ -124,7 +124,7 @@ exports.update = function(req, res) {
                     }
 
                     fs.rename(req.file.path, finalPath, function(err) {
-                        if ( err ) console.log('ERROR: ' + err);
+                        if (err) console.log('ERROR: ' + err);
 
                         user.local.picture = finalPath;
                         console.log('maybe:'+ user.local.path);
