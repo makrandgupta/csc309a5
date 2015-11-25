@@ -25,6 +25,17 @@ exports.allUsers = function (req, res) {
 };
 
 /*
+* Get the logged in user
+* */
+
+exports.me = function (req, res) {
+    res.render('profile.ejs', {
+        user : req.user // get the user out of session and pass to template
+    });
+};
+
+
+/*
 * Get single user information
 * */
 
@@ -133,11 +144,4 @@ exports.update = function(req, res) {
             });
         });
     }
-};
-
-/**
- * Authentication callback
- */
-exports.authCallback = function(req, res, next) {
-    res.redirect('/');
 };
