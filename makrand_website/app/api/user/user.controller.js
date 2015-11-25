@@ -4,7 +4,6 @@
 'use strict';
 
 var User = require('./../models/user.js');
-var config = require('../../config/environment');
 var request = require('request');
 var multer= require('multer');
 var fs = require('fs');

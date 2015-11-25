@@ -5,7 +5,6 @@
 'use strict';
 
 var User = require('./../models/user.js');
-var config = require('../../config/environment');
 
 //admin endpoints
 
