@@ -10,7 +10,7 @@ var User = require('./../models/user.js');
 
 //router.get('/admin/edit/:id', isAdmin, adminController.modify);
 exports.editUser = function (req, res) {
-    res.redirect('/edit/'+req.params.id);
+    res.redirect('/users/edit/'+req.params.id);
 };
 
 //router.get('/delete/:id', isAdmin, adminController.delete);

@@ -150,7 +150,7 @@ exports.update = function(req, res) {
             user.save(function(err) {
                 if(err) res.send(err);
 
-                res.redirect('/profile/'+req.params.user_id);
+                res.redirect('/users/'+req.params.id);
             });
         });
     }
