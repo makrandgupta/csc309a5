@@ -7,21 +7,17 @@
 <div class="container">
 	<header>
 		<% include /partials/header %>
-		<style>
-			tr.hover {
-				cursor: pointer;
-			}
-		</style>
 	</header>
-	<%if(user.local.accountType === "superAdmin"){
-				var superAdminControls = true;
-				var message = "Super Admin Mode";
-				var adminControls = true;
+	<%
+		var adminControls = false;
+		if(user.local.accountType === "superAdmin"){
+					var superAdminControls = true;
+					adminControls = true;
 
-	} 
-	if(user.local.accountType === "admin") {
-				var message = "Admin Mode";
-				var adminControls = true;%>
+		}
+		if(user.local.accountType === "admin") {
+					adminControls = true;
+	%>
 		<h1>Welcome <%= message%></h1>
 	<%} %>
 	
@@ -38,20 +34,20 @@
 		<tbody>
 			<% users.forEach(function(user){%>
 			
-				<tr onclick="window.document.location='/profile/<%= user._id%>'">
-					<td><a href="/profile/user._id"><%= user.local.email%></a></td>
+				<tr onclick="window.document.location='/users/<%= user._id%>'">
+					<td><a href="/users/user._id"><%= user.local.email%></a></td>
 					<td><%= user.local.displayName%></td>
 					<%if(adminControls === true){%>
 						<td>
-							<a href="/admin/edit/<%=user._id%>" class="btn btn-default">Edit</a>
+							<a href="/users/admin/edit/<%=user._id%>" class="btn btn-default">Edit</a>
 							<%if(user.local.accountType !== "superAdmin"){%>
-								<a href="/admin/delete/<%=user._id%>" class="btn btn-default">Delete</a>
+								<a href="/users/delete/<%=user._id%>" class="btn btn-default">Delete</a>
 							<%}%>
 							<%if(superAdminControls === true && user.local.accountType !== "superAdmin"){%>
 								<%if(user.local.accountType === "user"){%>
-									<a href="/admin/make-admin/<%=user._id%>" class="btn btn-default">Make Admin</a>
+									<a href="/users/make-admin/<%=user._id%>" class="btn btn-default">Make Admin</a>
 								<%} if(user.local.accountType === "admin"){%>
-									<a href="/admin/remove-admin/<%=user._id%>" class="btn btn-default">Remove Admin</a>
+									<a href="/users/remove-admin/<%=user._id%>" class="btn btn-default">Remove Admin</a>
 								<%}%>
 							<%}%>
 						</td>

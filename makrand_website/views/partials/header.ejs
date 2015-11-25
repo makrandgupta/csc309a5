@@ -7,13 +7,13 @@
 		<% if(typeof user !== "undefined"){%>
 		<ul class="nav navbar-nav">
 			<li><a href="/users">Home</a></li>
-			<li><a href="/edit/<%= user._id%>">Edit Profile</a></li>
+			<li><a href="/users/edit/<%= user._id%>">Edit Profile</a></li>
 		</ul>
 		<%}%>	
 		<ul class="nav navbar-nav navbar-right">
 		<% if(typeof user !== "undefined"){%>
 			<li><img src="<%= user.local.picture%>" class="img-responsive img-circle" style="max-height:40px; padding-top:10px;"></li>
-			<li><a href="/profile">Hello 
+			<li><a href="/me">Hello
 			<% if(typeof user.local.displayName !== "undefined" || user.local.displayName !== ''){%> 
 				<%=user.local.displayName%>
 			<%} if(user.local.displayName === '') {%>
