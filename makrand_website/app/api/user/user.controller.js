@@ -142,7 +142,7 @@ exports.update = function(req, res) {
                     });
                 }
 
-                finalPath = finalPath.replace(req.file.destination, '/img');
+                finalPath = finalPath.replace(req.file.destination, '/misc/img');
                 user.local.picture = finalPath;
                 console.log('dbpath: ' + user.local.picture);
             }

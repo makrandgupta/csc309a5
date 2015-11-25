@@ -23,7 +23,8 @@ function isAdmin(req, res, next){
 
 //define the upload directory
 var upDest = __dirname;
-upDest = upDest.replace("app", "views/assets/user_pictures");
+console.log("updest:" + upDest);
+upDest = upDest.replace("app/api/user", "views/assets/user_pictures");
 
 //tell multer where to upload the files
 var upload = multer({
@@ -35,7 +36,7 @@ var upload = multer({
 
 router.get('/', userController.allUsers);
 router.get('/me', userController.me);
-router.get('/edit/me', userController.editMe);
+router.get('/me/edit', userController.editMe);
 router.get('/:id', userController.singleUser); //merge /profile into
 router.get('/edit/:id', userController.editUser); //remove internal api reference
 router.post('/', userController.create);

@@ -10,16 +10,25 @@
 	</header>
 	<%
 		var adminControls = false;
+		var adminMessage = '';
+		var superAdminControls = false;
 		if(user.local.accountType === "superAdmin"){
-					var superAdminControls = true;
-					adminControls = true;
+			superAdminControls = true;
+			adminControls = true;
+			adminMessage = 'Super Admin';
 
 		}
 		if(user.local.accountType === "admin") {
-					adminControls = true;
+			adminControls = true;
+			adminMessage = 'Admin';
+		}
 	%>
-		<h1>Welcome <%= message%></h1>
-	<%} %>
+	<%
+		if(adminControls === true){
+			%><h1>Welcome <%= adminMessage%></h1><%
+		}
+	%>
+
 	
 	<table class="table table-striped table-bordered table-hover">
 		<thead>
@@ -35,7 +44,7 @@
 			<% users.forEach(function(user){%>
 			
 				<tr onclick="window.document.location='/users/<%= user._id%>'">
-					<td><a href="/users/user._id"><%= user.local.email%></a></td>
+					<td><a href="/users/<%= user._id%>"><%= user.local.email%></a></td>
 					<td><%= user.local.displayName%></td>
 					<%if(adminControls === true){%>
 						<td>

@@ -10,3 +10,5 @@ var miscController = require('./misc.controller');
 var router = express.Router();
 
 router.get('/img/:file', miscController.image);
+
+module.exports = router;
