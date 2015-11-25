@@ -66,10 +66,10 @@ module.exports = function(app, passport) {
     }));
 
     // Insert routes below
-    //app.use('/api/rentals', require('./api/rental'));
-    //app.use('/api/reservation-requests', require('./api/reservation-request'));
-    //app.use('/api/products', require('./api/product'));
-    //app.use('/api/things', require('./api/thing'));
+    //app.use('/rentals', require('./api/rental'));
+    //app.use('/reservation-requests', require('./api/reservation-request'));
+    //app.use('/products', require('./api/product'));
+    //app.use('/things', require('./api/thing'));
     app.use('/users', isLoggedIn, require('./api/user'));
 
     //app.use('/auth', require('./auth'));
