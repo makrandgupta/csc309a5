@@ -7,6 +7,13 @@
 <div class="container">
 	<header>
 		<% include /partials/header %>
+
+		<%
+			var displayPassword = false;
+			if (user === editUser){
+				displayPassword = true;
+			}
+		%>
 	</header>
 	<form class="form-horizontal" action="/users/<%= editUser._id %>" method="post" enctype="multipart/form-data">
 	<input name="method" type="hidden" value="put">
@@ -33,14 +40,14 @@
 			<input name="email" type="text" disabled class="form-control" value="<%= editUser.local.email %>">
 		</div>
 	</div>
-
+	<%if(displayPassword === true){%>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Change Password</label>
 		<div class="col-sm-6">
 			<input name="password" type="password" class="form-control">
 		</div>
 	</div>
-
+	<%}%>
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Display Name</label>
