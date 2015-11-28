@@ -1,1 +1,25 @@
-node_modules/
+# Node.js modules
+/node_modules/
+
+# IDEA IDE files
+.idea/
+*~
+
+# Misc. -------------------------------
+
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+pids
+logs
+results
+
+config/secretDatabase.js
+config/secretAuth.js
+
