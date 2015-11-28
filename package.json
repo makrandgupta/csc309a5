@@ -1,24 +1,22 @@
 {
-  "name": "a4",
+  "name": "csc309a5",
   "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
-    "bcrypt-nodejs": "latest",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.14.1",
-    "connect-busboy": "0.0.2",
-    "connect-flash": "~0.1.1",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.0",
-    "ejs": "~0.8.5",
-    "express": "4.9.1",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
     "express-session": "^1.12.1",
-    "fs": "0.0.2",
-    "mongoose": "~3.8.1",
+    "mongoose": "^4.2.8",
     "morgan": "^1.6.1",
     "multer": "^1.1.0",
-    "node-gyp": "^3.0.3",
-    "passport": "0.3.2",
-    "passport-local": "1.0.0"
-  },
-  "scripts": {
-    "start": "node index.js"
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "request": "^2.67.0"
   }
 }
