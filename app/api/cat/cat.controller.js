@@ -41,7 +41,6 @@ exports.deleteCat = function(req, res) {
 
 // Create a new cat given a user id, and redirect to 'edit cat' page.
 exports.newCat = function(req, res) {
-    var userid = req.params.userid;
     User.findById(userid, function(err, user) {
         if (err) res.send(err);
 
@@ -64,6 +63,56 @@ exports.newCat = function(req, res) {
 
                 res.redirect('/cats/edit/' + cat._id);
             });
+        });
+    });
+};
+
+// 
+exports.updateCat = function(req, res) {
+    Cat.findById(req.params.catid, function(err, cat) {
+        if (err) res.send(err);
+
+        if (req.body.name) cat.name = req.body.name;
+        if (req.body.age) cat.name = req.body.age;
+        if (req.body.weight) cat.name = req.body.weight;
+        if (req.body.color) cat.name = req.body.color;
+        if (req.body.breed) cat.name = req.body.breed;
+
+        if (req.file) {
+            var filePath;
+            if (req.file.mimetype === 'image/jpeg' ||
+                    req.file.mimetype === 'image/bmp' ||
+                    req.file.mimetype === 'image/png') {
+                filePath = req.file.path;
+                switch (req.file.mimetype) {
+                    case 'image/jpeg':
+                        filePath += '.jpg';
+                        break;
+                    case 'image/bmp':
+                        filePath += '.bmp';
+                        break;
+                    case 'image/png':
+                        filePath += '.png';
+                        break;
+                    default:
+                        filePath = filePath;
+                }
+
+                fs.rename(req.file.path, filePath, function(err) {
+                    if (err) console.log('ERROR: ' + err);
+
+                    cat.picture = filePath;
+                });
+            }
+
+            filePath = filePath.replace(req.file.destination, '/misc/img');
+            cat.picture = filePath;
+        }
+
+        cat.save(function(err) {
+            if (err) res.send(err);
+
+            res.redirect('/users/' + cat.owner);
         });
     });
 };

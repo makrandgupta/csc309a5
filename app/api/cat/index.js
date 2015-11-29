@@ -27,7 +27,9 @@ var router = express.Router();
 router.get('/edit/:catid', catController.getCatEditPage);
 router.get('/delete/:catid', catController.deleteCat);
 router.get('/new/:userid', catController.newCat);
-//router.get('/update/:catid', catController.updateCat);
+router.post('/update/:catid',
+            upload.single('picture'),
+            catController.updateCat);
 
 module.exports = router;
 
