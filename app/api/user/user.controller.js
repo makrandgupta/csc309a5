@@ -3,8 +3,8 @@
  */
 'use strict';
 
-var User = require('./../models/user.js');
-var Cat = require('./../models/cat.js');
+var User = require('../../models/user.js');
+var Cat = require('../../models/cat.js');
 var request = require('request');
 var multer= require('multer');
 var fs = require('fs');
