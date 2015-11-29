@@ -12,23 +12,23 @@
 	<%
 	if(typeof viewUser !=="undefined"){
 		if(user !== viewUser){
-			if(user.local.accountType === "superAdmin")
+			if(user.accountType === "superAdmin")
 				var superAdminControls = true;
-			if(user.local.accountType === "admin")
+			if(user.accountType === "admin")
 				var adminControls = true;
 		}
 		user = viewUser;
 	}%>
 
 	<div class="page-header text-center">
-		<h1><%= user.local.displayName%></h1>
+		<h1><%= user.displayName%></h1>
 	</div>
 
 	<div class="row">
 	
 		<!-- LOCAL INFORMATION -->
 		<div class="row col-md-2 col-md-offset-1">
-		<img src="<%= user.local.picture%>" class="img-responsive" style="max-height:200px;">
+		<img src="<%= user.picture%>" class="img-responsive" style="max-height:200px;">
 		</div>
 		<div class="row col-md-4 col-md-offset-1">
 			<span></span>
@@ -36,7 +36,7 @@
 				<h3><span class="fa fa-user"></span> </h3>
 				<p>
 					<strong>Email</strong>: <%= user.local.email %><br>
-					<strong>Description</strong>: <%= user.local.description %><br>	
+					<strong>Description</strong>: <%= user.description %><br>	
 				</p>
 			</div>
 		</div>
@@ -44,7 +44,7 @@
 	</div>
 	
 	<div class="page-header text-center">
-		<h1><%= user.local.displayName%>'s cats</h1>
+		<h1><%= user.displayName%>'s cats</h1>
 	</div>
 	<div class="row">
 		<% cats.forEach(function(cat) {%>

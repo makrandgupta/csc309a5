@@ -12,13 +12,13 @@
 		var adminControls = false;
 		var adminMessage = '';
 		var superAdminControls = false;
-		if(user.local.accountType === "superAdmin"){
+		if(user.accountType === "superAdmin"){
 			superAdminControls = true;
 			adminControls = true;
 			adminMessage = 'Super Admin';
 
 		}
-		if(user.local.accountType === "admin") {
+		if(user.accountType === "admin") {
 			adminControls = true;
 			adminMessage = 'Admin';
 		}
@@ -45,17 +45,17 @@
 			
 				<tr onclick="window.document.location='/users/<%= user._id%>'">
 					<td><a href="/users/<%= user._id%>"><%= user.local.email%></a></td>
-					<td><%= user.local.displayName%></td>
+					<td><%= user.displayName%></td>
 					<%if(adminControls === true){%>
 						<td>
-							<%if(user.local.accountType !== "superAdmin"){%>
+							<%if(user.accountType !== "superAdmin"){%>
 							<a href="/users/admin/edit/<%=user._id%>" class="btn btn-default">Edit</a>
 							<a href="/users/delete/<%=user._id%>" class="btn btn-default">Delete</a>
 							<%}%>
-							<%if(superAdminControls === true && user.local.accountType !== "superAdmin"){%>
-								<%if(user.local.accountType === "user"){%>
+							<%if(superAdminControls === true && user.accountType !== "superAdmin"){%>
+								<%if(user.accountType === "user"){%>
 									<a href="/users/make-admin/<%=user._id%>" class="btn btn-default">Make Admin</a>
-								<%} if(user.local.accountType === "admin"){%>
+								<%} if(user.accountType === "admin"){%>
 									<a href="/users/remove-admin/<%=user._id%>" class="btn btn-default">Remove Admin</a>
 								<%}%>
 							<%}%>

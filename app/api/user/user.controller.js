@@ -120,8 +120,8 @@ exports.update = function(req, res) {
             var finalPath;
 
             //update the user info if new
-            if(req.body.displayName) user.local.displayName = req.body.displayName;
-            if(req.body.description) user.local.description= req.body.description;
+            if(req.body.displayName) user.displayName = req.body.displayName;
+            if(req.body.description) user.description= req.body.description;
             if(req.body.password) user.local.password = user.generateHash(req.body.password);
 
             if(req.file){
@@ -144,14 +144,14 @@ exports.update = function(req, res) {
                     fs.rename(req.file.path, finalPath, function(err) {
                         if (err) console.log('ERROR: ' + err);
 
-                        user.local.picture = finalPath;
-                        console.log('maybe:'+ user.local.path);
+                        user.picture = finalPath;
+                        console.log('maybe:'+ user.path);
                     });
                 }
 
                 finalPath = finalPath.replace(req.file.destination, '/misc/img');
-                user.local.picture = finalPath;
-                console.log('dbpath: ' + user.local.picture);
+                user.picture = finalPath;
+                console.log('dbpath: ' + user.picture);
             }
             //save the user
             user.save(function(err) {
