@@ -132,6 +132,8 @@ exports.update = function(req, res) {
                         case 'image/png':
                             finalPath += '.png';
                             break;
+						default:
+							finalPath = finalPath;
                     }
 
                     fs.rename(req.file.path, finalPath, function(err) {
