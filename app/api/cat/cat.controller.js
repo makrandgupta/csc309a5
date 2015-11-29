@@ -33,6 +33,11 @@ exports.newCat = function(req, res) {
 
         var cat = new Cat();
         cat.owner = user._id;
+	cat.name = '';
+	cat.age = '';
+	cat.weight = '';
+	cat.color = '';
+	cat.breed = '';
         cat.save(function(err) {
             if (err) res.send(err);
 
