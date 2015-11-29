@@ -78,6 +78,7 @@ module.exports = function(app, passport) {
     //app.use('/things', require('./api/thing'));
     app.use('/users', isLoggedIn, require('./api/user'));
     app.use('/misc', isLoggedIn, require('./api/misc'));
+    app.use('/cats', isLoggedIn, require('./api/cat'));
 
     //app.use('/auth', require('./auth'));
 };
