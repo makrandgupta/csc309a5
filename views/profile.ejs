@@ -44,7 +44,11 @@
 	</div>
 	
 	<div class="page-header text-center">
-		<h1><%= user.displayName%>'s cats</h1>
+		<% if (typeof user.displayName !=="undefined"){%>
+			<h1><%= user.displayName%>'s cats</h1>
+		<% } else {%>
+			<h1>User's cats</h1>
+		<%}%>
 	</div>
 	<div class="row">
 		<% cats.forEach(function(cat) {%>

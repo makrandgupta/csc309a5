@@ -4,6 +4,7 @@
 'use strict';
 
 var User = require('./../models/user.js');
+var Cat = require('./../models/cat.js');
 var request = require('request');
 var multer= require('multer');
 var fs = require('fs');
@@ -28,7 +29,7 @@ exports.allUsers = function (req, res) {
 * */
 
 exports.me = function (req, res) {
-    Cat.find({'_id': { $in: [user.cats]}, function(err, cats) {
+    Cat.find({'_id': { $in: user.cats}}, function(err, cats) {
 	if(err) res.send(err);
 	    
 	res.render('profile.ejs', {
@@ -58,7 +59,7 @@ exports.singleUser = function (req, res) {
     User.findById(req.params.id, function(err, user) {
         if(err) res.send(err);
 	
-	Cat.find({'_id': { $in: [user.cats]}, function(err, cats) {
+	Cat.find({'_id': { $in: user.cats}}, function(err, cats) {
 	    if(err) res.send(err);
 	    
 	    res.render('profile.ejs', {
