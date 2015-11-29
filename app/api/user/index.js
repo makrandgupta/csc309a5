@@ -6,7 +6,7 @@
 var express = require('express');
 var userController = require('./user.controller');
 var adminController = require('./admin.controller');
-var User = require('./../models/user');
+var User = require('../../models/user');
 var multer= require('multer');
 
 var router = express.Router();

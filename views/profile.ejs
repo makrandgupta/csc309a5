@@ -51,7 +51,8 @@
 		<%}%>
 	</div>
 	<div class="row">
-		<% cats.forEach(function(cat) {%>
+		<% if (typeof cats !=="undefined") {
+		cats.forEach(function(cat) {%>
 			<div class="row col-md-2 col-md-offset-1">
 				<img src="<%= cat.picture%> class="img-responsive" style="max-height:200px;"><br>
 				<strong><%= cat.name%></strong><br>
@@ -65,7 +66,16 @@
 				if(user == viewUser || superAdminControls || adminControls)%>
 					<a href="/cats/edit/<%= cat._id%>">Edit cat</a>
 			<%}%>
-		<%});%>
+		<%});
+		}%>
+	</div>
+	
+	<div class="row">
+		<%
+		if(typeof viewUser !=="undefined"){
+			if(user == viewUser)%>
+				<a href="/cats/new/<%= viewUser._id%>">New cat</a>
+		<%}%>
 	</div>
 
 </div>
