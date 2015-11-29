@@ -16,7 +16,7 @@ var bodyParser = require('body-parser');
 // configuration ===============================================================
 
 // connect to our database
-mongoose.connect('mongodb://localhost/userify');
+mongoose.connect('mongodb://csc309a5:csc309a5@ds061474.mongolab.com:61474/csc309a5');
 
 require('./app/passport')(passport); // pass passport for configuration
 
