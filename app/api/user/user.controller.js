@@ -29,7 +29,7 @@ exports.allUsers = function (req, res) {
 * */
 
 exports.me = function (req, res) {
-    Cat.find({'_id': { $in: user.cats}}, function(err, cats) {
+    Cat.find({'_id': { $in: req.user.cats}}, function(err, cats) {
 	if(err) res.send(err);
 	    
 	res.render('profile.ejs', {
