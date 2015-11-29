@@ -13,8 +13,6 @@ var flash    = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var configDB = require('./config/database.js');
-
 // configuration ===============================================================
 
 // connect to our database
@@ -30,17 +28,17 @@ require('./app/passport')(passport); // pass passport for configuration
 
 app.use(bodyParser.json());
 
-	app.set('view engine', 'ejs'); // set up ejs for templating
+app.set('view engine', 'ejs'); // set up ejs for templating
 
-	// required for passport
-	app.use(session({ 
-		secret: 'ilovescotchscotchyscotchscotch',
-		resave: true,
-		saveUninitialized: true
-	})); // session secret
-	app.use(passport.initialize());
-	app.use(passport.session()); // persistent login sessions
-	app.use(flash()); // use connect-flash for flash messages stored in session
+// required for passport
+app.use(session({ 
+	secret: 'ilovescotchscotchyscotchscotch',
+	resave: true,
+	saveUninitialized: true
+})); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
 app.use(express.static(__dirname + '/'));
 
 
