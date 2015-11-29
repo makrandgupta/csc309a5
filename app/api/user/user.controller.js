@@ -52,12 +52,16 @@ exports.editMe = function (req, res) {
 exports.singleUser = function (req, res) {
     User.findById(req.params.id, function(err, user) {
         if(err) res.send(err);
-
-        res.render('profile.ejs', {
-            viewUser: user,
-            user : req.user,
-            admin: req.user
-        });
+	
+	Cat.find({'_id': { $in: [user.cats]}, function(err, cats) {
+	    if(err) res.send(err);
+	    
+	    res.render('profile.ejs', {
+		viewUser: user,
+		user : req.user,
+		cats: cats
+	    });
+	});
     });
 };
 
@@ -88,6 +92,7 @@ exports.create = function (req, res) {
     user.name = req.body.name;
     user.username = req.body.username;
     user.password = req.body.password;
+    user.cats = [];
 
     //save and check for errors
     user.save(function(err){
@@ -132,8 +137,8 @@ exports.update = function(req, res) {
                         case 'image/png':
                             finalPath += '.png';
                             break;
-						default:
-							finalPath = finalPath;
+			default:
+			     finalPath = finalPath;
                     }
 
                     fs.rename(req.file.path, finalPath, function(err) {
