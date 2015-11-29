@@ -4,6 +4,7 @@
 'use strict';
 
 var User = require('./../models/user.js');
+var Cat = require('./../models/cat.js');
 var request = require('request');
 var multer= require('multer');
 var fs = require('fs');
@@ -28,8 +29,13 @@ exports.allUsers = function (req, res) {
 * */
 
 exports.me = function (req, res) {
-    res.render('profile.ejs', {
-        user : req.user // get the user out of session and pass to template
+    Cat.find({'_id': { $in: user.cats}}, function(err, cats) {
+	if(err) res.send(err);
+	    
+	res.render('profile.ejs', {
+	    user : req.user, // get the user out of session and pass to template
+	    cats: cats
+	});
     });
 };
 

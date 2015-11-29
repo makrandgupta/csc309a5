@@ -15,4 +15,4 @@ var catSchema = mongoose.Schema({
 // methods ======================
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('Cat', userSchema);
+module.exports = mongoose.model('Cat', catSchema);
