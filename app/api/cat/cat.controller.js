@@ -4,24 +4,40 @@
 
 var User = require('../../models/user.js');
 var Cat = require('../../models/cat.js');
-var request = require('request');
-var multer = require('multer');
-var fs = require('fs');
 
-// Cat edit page --------------------------------------------------------------
+// Cat API --------------------------------------------------------------------
 
+// Send the cat edit page for a particular cat.
 exports.getCatEditPage = function(req, res) {
     Cat.findById(req.params.catid, function(err, cat) {
         if (err) res.send(err);
 
-        // Send the cat edit page.
         res.render('editcat.ejs', {
             cat : cat
         });
     });
 };
 
-// Cat API --------------------------------------------------------------------
+// Delete a particular cat.
+exports.deleteCat = function(req, res) {
+    // Find the cat.
+    Cat.findById(req.params.catid, function(err, cat) {
+        if (err) res.send(err);
+
+        if (!cat) res.send("Error: no such cat.");
+
+        // Find the cat's owner.
+        var ownerid = cat.owner;
+
+        // Remove the cat.
+        Cat.remove({_id: cat._id}, function(err) {
+            if (err) res.send(err);
+
+            // Redirect back to the user's profile.
+            res.redirect('/users/' + ownerid);
+        });
+    });
+};
 
 // Create a new cat given a user id, and redirect to 'edit cat' page.
 exports.newCat = function(req, res) {

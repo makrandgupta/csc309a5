@@ -23,11 +23,9 @@ var router = express.Router();
 
 // TODO: check permissions before performing actions
 
-// Cat edit page.
-router.get('/edit/:catid', catController.getCatEditPage);
-
 // Cat API.
-//router.get('/delete/:catid', catController.deleteCat);
+router.get('/edit/:catid', catController.getCatEditPage);
+router.get('/delete/:catid', catController.deleteCat);
 router.get('/new/:userid', catController.newCat);
 //router.get('/update/:catid', catController.updateCat);
 
