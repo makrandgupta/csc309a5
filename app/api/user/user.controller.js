@@ -53,7 +53,7 @@ exports.singleUser = function (req, res) {
     User.findById(req.params.id, function(err, user) {
         if(err) res.send(err);
 	
-	Cat.find({'_id': { $in: [user.cats]}, function(err, cats) {
+	Cat.find({'_id': { $in: user.cats}}, function(err, cats) {
 	    if(err) res.send(err);
 	    
 	    res.render('profile.ejs', {
