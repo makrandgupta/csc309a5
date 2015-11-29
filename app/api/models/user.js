@@ -9,10 +9,11 @@ var userSchema = mongoose.Schema({
     local            : {
         email        : String,
         password     : String,
-		displayName  : String,
-		description  : String,
-		picture	     : String,
-		accountType	 : String //valid types: {user, admin, superAdmin}
+	displayName  : String,
+	description  : String,
+	picture	     : String,
+	accountType  : String, //valid types: {user, admin, superAdmin}
+	cats	     : [String] //array of ids
     }
 
 
