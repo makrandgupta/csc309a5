@@ -16,9 +16,11 @@ var bodyParser = require('body-parser');
 var configDB = require('./config/database.js');
 
 // configuration ===============================================================
-mongoose.connect(configDB.url); // connect to our database
 
-require('./config/passport')(passport); // pass passport for configuration
+// connect to our database
+mongoose.connect('mongodb://localhost/userify');
+
+require('./app/passport')(passport); // pass passport for configuration
 
 	// set up our express application
 	app.use(morgan('dev')); // log every request to the console
