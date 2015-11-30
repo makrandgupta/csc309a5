@@ -8,6 +8,9 @@
 .idea/
 *~
 
+# Vim swap files
+.*.swp
+
 # Misc. -------------------------------
 
 lib-cov

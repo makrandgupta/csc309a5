@@ -73,10 +73,10 @@ exports.updateCat = function(req, res) {
         if (err) res.send(err);
 
         if (req.body.name) cat.name = req.body.name;
-        if (req.body.age) cat.name = req.body.age;
-        if (req.body.weight) cat.name = req.body.weight;
-        if (req.body.color) cat.name = req.body.color;
-        if (req.body.breed) cat.name = req.body.breed;
+        if (req.body.age) cat.age = req.body.age;
+        if (req.body.weight) cat.weight = req.body.weight;
+        if (req.body.color) cat.color = req.body.color;
+        if (req.body.breed) cat.breed = req.body.breed;
 
         if (req.file) {
             var filePath;
