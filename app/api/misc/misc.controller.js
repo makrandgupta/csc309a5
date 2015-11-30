@@ -16,5 +16,5 @@ exports.image = function (req, res) {
             console.log("directory exists");
         }
     });
-    res.sendfile(imgPath+req.params.file);
+    res.sendFile(imgPath+req.params.file);
 };
