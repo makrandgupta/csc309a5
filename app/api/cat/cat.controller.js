@@ -5,6 +5,9 @@
 var User = require('../../models/user.js');
 var Cat = require('../../models/cat.js');
 
+var fs = require('fs');
+var multer = require('multer');
+
 // Cat API --------------------------------------------------------------------
 
 // Send the cat edit page for a particular cat.
