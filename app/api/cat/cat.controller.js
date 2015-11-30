@@ -41,7 +41,7 @@ exports.deleteCat = function(req, res) {
 
 // Create a new cat given a user id, and redirect to 'edit cat' page.
 exports.newCat = function(req, res) {
-    User.findById(userid, function(err, user) {
+    User.findById(req.params.userid, function(err, user) {
         if (err) res.send(err);
 
         if (!user) res.send("Error: no such user.");
@@ -56,7 +56,7 @@ exports.newCat = function(req, res) {
         cat.save(function(err) {
             if (err) res.send(err);
 
-            user.cats.push(cat);
+            user.cats.push(cat._id);
             user.markModified('cats');
             user.save(function(err) {
                 if (err) res.send(err);

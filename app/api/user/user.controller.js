@@ -34,6 +34,7 @@ exports.me = function (req, res) {
 	    
 	res.render('profile.ejs', {
 	    user : req.user, // get the user out of session and pass to template
+            viewUser : req.user,
 	    cats: cats
 	});
     });
