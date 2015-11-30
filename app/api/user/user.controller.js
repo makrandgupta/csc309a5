@@ -99,10 +99,12 @@ exports.create = function (req, res) {
     user.name = req.body.name;
     user.username = req.body.username;
     user.password = req.body.password;
+    user.isCatWalker = false;
     user.cats = [];
 
-    //save and check for errors
+    //save and check for errors 
     user.save(function(err){
+		console.log("Is CatWalker: " + user.isCatWalker);
         if(err){
             // duplicate entry
             if(err.code == 11000)

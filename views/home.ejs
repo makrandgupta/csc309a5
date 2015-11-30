@@ -35,6 +35,7 @@
 			<tr>
 				<th>Email</th>
 				<th>Display Name</th>
+				<th>Cat Walker</th>
 				<%if(adminControls === true) { %>
 					<th>Admin Controls</th>
 				<%}%>
@@ -42,9 +43,10 @@
 		</thead>
 		<tbody>
 			<% users.forEach(function(user){%>
-			
+			    
 				<tr onclick="window.document.location='/users/<%= user._id%>'">
 					<td><a href="/users/<%= user._id%>"><%= user.local.email%></a></td>
+                    <td><%= user.isCatWalker%></td>
 					<td><%= user.displayName%></td>
 					<%if(adminControls === true){%>
 						<td>
