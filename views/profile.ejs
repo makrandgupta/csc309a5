@@ -60,12 +60,12 @@
 				Weight: <%= cat.weight%><br>
 				Color: <%= cat.color%><br>
 				Breed: <%= cat.breed%><br>
+				<%
+					if(typeof viewUser !=="undefined"){
+						if(user == viewUser || superAdminControls || adminControls)%>
+							<a href="/cats/edit/<%= cat._id%>">Edit cat</a>
+				<%}%>
 			</div>
-			<%
-			if(typeof viewUser !=="undefined"){
-				if(user == viewUser || superAdminControls || adminControls)%>
-					<a href="/cats/edit/<%= cat._id%>">Edit cat</a>
-			<%}%>
 		<%});
 		}%>
 	</div>
