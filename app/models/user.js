@@ -15,8 +15,11 @@ var userSchema = mongoose.Schema({
 	isCatWalker  : Boolean,
 	picture	     : String,
 	accountType  : String, //valid types: {user, admin, superAdmin}
-	cats	     : [String] //array of ids
-
+	cats	     : [String], //array of ids
+	phone        : String,
+	rating       : Number,  // Average rating
+	ratedBy      : [String],  // Who has already rated them, to stop false ratings
+	ratedNum     : Number  // Total users rated by for calculating average
 
 });
 

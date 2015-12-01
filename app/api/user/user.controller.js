@@ -101,6 +101,9 @@ exports.create = function (req, res) {
     user.password = req.body.password;
     user.isCatWalker = false;
     user.cats = [];
+	user.rating = 0;
+	user.ratedNum = 0;
+	user.ratedBy = [];
 
     //save and check for errors 
     user.save(function(err){
@@ -130,7 +133,8 @@ exports.update = function(req, res) {
 
             //update the user info if new
             if(req.body.displayName) user.displayName = req.body.displayName;
-            if(req.body.description) user.description= req.body.description;
+            if(req.body.description) user.description = req.body.description;
+			if(req.body.phone) user.phone = req.body.phone;
             if(req.body.password) user.local.password = user.generateHash(req.body.password);
 
             if(req.file){

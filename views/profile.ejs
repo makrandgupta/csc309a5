@@ -36,7 +36,17 @@
 				<h3><span class="fa fa-user"></span> </h3>
 				<p>
 					<strong>Email</strong>: <%= user.local.email %><br>
-					<strong>Description</strong>: <%= user.description %><br>	
+					<strong>Description</strong>: <%= user.description %><br>
+					<strong>Phone #:</strong> <%= user.phone %><br>
+					<%
+					if(user.isCatWalker) {%>
+						<strong>Rating:</strong>
+						<% if(user.rating != 0) {%>
+							<%= user.rating %>
+						<%} else {%>
+							unrated
+						<%}%>/5 stars<br>
+					<%}%>
 				</p>
 			</div>
 		</div>
