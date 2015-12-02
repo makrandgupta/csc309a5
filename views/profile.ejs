@@ -38,15 +38,19 @@
 					<strong>Email</strong>: <%= user.local.email %><br>
 					<strong>Description</strong>: <%= user.description %><br>
 					<strong>Phone #:</strong> <%= user.phone %><br>
-					<%
-					if(user.isCatWalker) {%>
+					
 						<strong>Rating:</strong>
 						<% if(user.rating != 0) {%>
 							<%= user.rating %>
 						<%} else {%>
 							unrated
 						<%}%>/5 stars<br>
-					<%}%>
+						<strong>Rate:</strong>
+						<a href="/users/rate/<%= viewUser._id%>/1">1</a> 
+						<a href="/users/rate/<%= viewUser._id%>/2">2</a> 
+						<a href="/users/rate/<%= viewUser._id%>/3">3</a> 
+						<a href="/users/rate/<%= viewUser._id%>/4">4</a> 
+						<a href="/users/rate/<%= viewUser._id%>/5">5</a><br>
 				</p>
 			</div>
 		</div>

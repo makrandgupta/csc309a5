@@ -71,10 +71,15 @@ module.exports = function(passport) {
 					
 					// set the user's local credentials
 					newUser.local.email    = email;
-					newUser.local.picture    = '';
-					newUser.local.displayName    = '';
+					newUser.picture    = '';
+					newUser.displayName    = '';
 					newUser.local.description    = '';
 					newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
+					newUser.cats = [];
+					newUser.rating = 0;
+					newUser.ratings = {};
+					newUser.ratingNum = 0;
+					newUser.isCatWalker = true;
 					
 
 //					save the user

@@ -60,15 +60,15 @@ exports.singleUser = function (req, res) {
     User.findById(req.params.id, function(err, user) {
         if(err) res.send(err);
 	
-	Cat.find({'_id': { $in: user.cats}}, function(err, cats) {
-	    if(err) res.send(err);
+		Cat.find({'_id': { $in: user.cats}}, function(err, cats) {
+			if(err) res.send(err);
 	    
-	    res.render('profile.ejs', {
-		viewUser: user,
-		user : req.user,
-		cats: cats
-	    });
-	});
+			res.render('profile.ejs', {
+			viewUser: user,
+			user : req.user,
+			cats: cats
+			});
+		});
     });
 };
 
@@ -99,11 +99,12 @@ exports.create = function (req, res) {
     user.name = req.body.name;
     user.username = req.body.username;
     user.password = req.body.password;
-    user.isCatWalker = false;
+    user.isCatWalker = true;
+	user.markModified('isCatWalker');
     user.cats = [];
 	user.rating = 0;
-	user.ratedNum = 0;
-	user.ratedBy = [];
+	user.ratings = {};
+	user.ratingNum = 0;
 
     //save and check for errors 
     user.save(function(err){
@@ -150,8 +151,8 @@ exports.update = function(req, res) {
                         case 'image/png':
                             finalPath += '.png';
                             break;
-			default:
-			     finalPath = finalPath;
+						default:
+							finalPath = finalPath;
                     }
 
                     fs.rename(req.file.path, finalPath, function(err) {
@@ -175,3 +176,28 @@ exports.update = function(req, res) {
         });
     }
 };
+
+exports.rate = function(req, res) {
+	User.findById(req.params.id, function(err, user) {
+        if(err) res.send(err);
+
+        if (!isNaN(req.params.rating) && req.params.rating >= 1 && req.params.rating <= 5) {
+			var total = user.rating * user.ratingNum;
+			if (req.user._id in user.ratings) {
+				total -= user.ratings[req.user._id];
+			} else {
+				user.ratingNum++;
+			}
+			total += Number(req.params.rating);
+			user.rating = total / user.ratingNum;
+			user.ratings[req.user._id] = Number(req.params.rating);
+			
+			user.markModified('ratings');
+		}
+		user.save(function(err) {
+			if(err) res.send(err);
+			
+			res.redirect('/users/'+req.params.id);
+		});
+    });
+}

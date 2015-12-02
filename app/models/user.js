@@ -18,8 +18,8 @@ var userSchema = mongoose.Schema({
 	cats	     : [String], //array of ids
 	phone        : String,
 	rating       : Number,  // Average rating
-	ratedBy      : [String],  // Who has already rated them, to stop false ratings
-	ratedNum     : Number  // Total users rated by for calculating average
+	ratings      : {String : Number},  // Existing ratings accessed by id, so we can change them
+	ratingNum    : Number  // Total users rated by for calculating average
 
 });
 
