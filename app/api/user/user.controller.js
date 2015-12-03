@@ -17,6 +17,7 @@ exports.allUsers = function (req, res) {
     User.find(function(err, users) {
         if(err) res.send(err);
         // return the users list
+		console.log(users);
         res.render('home.ejs', {
             users : users,
             user : req.user
@@ -90,7 +91,7 @@ exports.editUser = function (req, res) {
 
 /*
 * Add new user
-* */
+* 
 
 exports.create = function (req, res) {
     var user = new User();//new instance of User model
@@ -120,6 +121,8 @@ exports.create = function (req, res) {
         res.json({success: true, message: 'User created!'});
     });
 };
+
+*/
 
 /*
 * Update user
@@ -180,17 +183,29 @@ exports.update = function(req, res) {
 exports.rate = function(req, res) {
 	User.findById(req.params.id, function(err, user) {
         if(err) res.send(err);
-
+		
+		// Check that we have an appropriate rating value here
         if (!isNaN(req.params.rating) && req.params.rating >= 1 && req.params.rating <= 5) {
+			// Get total of ratings by multiplying the average by # of ratings
 			var total = user.rating * user.ratingNum;
-			if (req.user._id in user.ratings) {
-				total -= user.ratings[req.user._id];
+			
+			// Find whether the requesting user has rated this user already
+			var result = user.ratings.filter(function( obj ) {
+				return obj.user == req.user._id;
+			});
+			// result is not empty if they have rated before
+			if (result.length != 0) {
+				// Subtract user's rating from total then update their rating
+				total -= result[0].rating;
+				result[0].rating = Number(req.params.rating);
 			} else {
+				// Increment total amount of ratings and push user's rating to list of ratings
 				user.ratingNum++;
+				user.ratings.push({'user' : req.user._id, 'rating' : Number(req.params.rating)});
 			}
+			// Add new rating to the total then divide by # of ratings to get average
 			total += Number(req.params.rating);
 			user.rating = total / user.ratingNum;
-			user.ratings[req.user._id] = Number(req.params.rating);
 			
 			user.markModified('ratings');
 		}
