@@ -40,7 +40,7 @@ router.get('/me/edit', userController.editMe);
 router.get('/:id', userController.singleUser); //merge /profile into
 router.get('/edit/:id', userController.editUser); //remove internal api reference
 router.get('/rate/:id/:rating', userController.rate);
-router.post('/', userController.create);
+// router.post('/', userController.create);
 router.post('/:id', upload.single('picture'), userController.update);
 
 //admin endpoints

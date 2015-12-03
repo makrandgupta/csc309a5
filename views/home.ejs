@@ -46,8 +46,8 @@
 			    
 				<tr onclick="window.document.location='/users/<%= user._id%>'">
 					<td><a href="/users/<%= user._id%>"><%= user.local.email%></a></td>
-                    <td><%= user.isCatWalker%></td>
 					<td><%= user.displayName%></td>
+					<td><%= user.isCatWalker%></td>
 					<%if(adminControls === true){%>
 						<td>
 							<%if(user.accountType !== "superAdmin"){%>

@@ -77,7 +77,8 @@ module.exports = function(passport) {
 					newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
 					newUser.cats = [];
 					newUser.rating = 0;
-					newUser.ratings = {};
+					newUser.ratings = [];
+					newUser.markModified('ratings');
 					newUser.ratingNum = 0;
 					newUser.isCatWalker = true;
 					
@@ -86,6 +87,7 @@ module.exports = function(passport) {
 					newUser.save(function(err) {
 						if (err)
 							throw err;
+						console.log(newUser);
 						return done(null, newUser);
 					});
 				});
