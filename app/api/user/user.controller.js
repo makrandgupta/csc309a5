@@ -50,6 +50,13 @@ exports.editMe = function (req, res) {
     });
 };
 
+/*
+* Get search page
+* */
+
+exports.search = function (req, res) {
+	res.end();
+};
 
 /*
 * Get single user information
@@ -87,6 +94,7 @@ exports.editUser = function (req, res) {
 
     });
 };
+
 
 /*
 * Update user

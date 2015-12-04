@@ -34,6 +34,7 @@ var upload = multer({
 router.get('/', userController.allUsers);
 router.get('/me', userController.me);
 router.get('/me/edit', userController.editMe);
+router.get('/me/search', userController.search);
 router.get('/:id', userController.singleUser);
 router.get('/edit/:id', userController.editUser);
 router.get('/rate/:id/:rating', userController.rate);
