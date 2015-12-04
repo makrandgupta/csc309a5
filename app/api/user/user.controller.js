@@ -186,6 +186,30 @@ exports.rate = function(req, res) {
     });
 }
 
+// post request that comments on a user's profile
 exports.comment = function(req, res) {
-    // TODO
+    User.findById(req.params.id, function(err, targetUser) {
+        if (err) return res.send(err);
+
+        if (!user) return res.send('Error: no such user.');
+
+        var comment = new Comment();
+
+        comment.targetUserId = targetUser._id;
+        comment.sourceUserId = req.user._id;
+        comment.sourceUserName = req.user.displayName;
+        comment.text = req.body.comment;
+
+        comment.save(function(err) {
+            if (err) return res.send(err);
+
+            targetUser.comments.push(comment._id);
+            targetUser.markModified('comments');
+            targetUser.save(function(err) {
+                if (err) return res.send(err);
+
+                res.redirect('/users/' + targetUser._id);
+            });
+        });
+    });
 }
