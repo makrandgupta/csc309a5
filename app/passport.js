@@ -80,7 +80,7 @@ module.exports = function(passport) {
 					newUser.ratings = [];
 					newUser.markModified('ratings');
 					newUser.ratingNum = 0;
-					newUser.isCatWalker = true;
+					newUser.isCatWalker = false;
 					
 
 //					save the user
