@@ -61,7 +61,10 @@ exports.editMe = function (req, res) {
 * */
 
 exports.search = function (req, res) {
-	res.end();
+	res.render('search.ejs', {
+		user: req.user,
+		editUser: req.user
+	});
 };
 
 /*
