@@ -210,14 +210,14 @@ exports.rate = function(req, res) {
 
 // post request that comments on a user's profile
 exports.comment = function(req, res) {
-    User.findById(req.params.id, function(err, targetUser) {
+    User.findById(req.params.id, function(err, user) {
         if (err) return res.send(err);
 
         if (!user) return res.send('Error: no such user.');
 
         var comment = new Comment();
 
-        comment.targetUserId = targetUser._id;
+        comment.targetUserId = user._id;
         comment.sourceUserId = req.user._id;
         comment.sourceUserName = req.user.displayName;
         comment.text = req.body.comment;
@@ -225,12 +225,12 @@ exports.comment = function(req, res) {
         comment.save(function(err) {
             if (err) return res.send(err);
 
-            targetUser.comments.push(comment._id);
-            targetUser.markModified('comments');
-            targetUser.save(function(err) {
+            user.comments.push(comment._id);
+            user.markModified('comments');
+            user.save(function(err) {
                 if (err) return res.send(err);
 
-                res.redirect('/users/' + targetUser._id);
+                res.redirect('/users/' + user._id);
             });
         });
     });
