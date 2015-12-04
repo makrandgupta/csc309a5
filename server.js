@@ -12,6 +12,7 @@ var passport = require('passport');
 var flash    = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+//var csurf = require('csurf'); // TODO: use this module for added security
 
 // configuration ===============================================================
 
@@ -20,12 +21,12 @@ mongoose.connect('mongodb://csc309a5:csc309a5@ds061474.mongolab.com:61474/csc309
 
 require('./app/passport')(passport); // pass passport for configuration
 
-	// set up our express application
-	app.use(morgan('dev')); // log every request to the console
-	app.use(cookieParser()); // read cookies (needed for auth)
-	// app.use(bodyParser()); // get information from html forms
-	app.use(bodyParser.urlencoded({extended: true}));
+// set up our express application
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+// app.use(bodyParser()); // get information from html forms
 
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.set('view engine', 'ejs'); // set up ejs for templating

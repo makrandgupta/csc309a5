@@ -29,13 +29,19 @@ exports.allUsers = function (req, res) {
 
 exports.me = function (req, res) {
     Cat.find({'_id': { $in: req.user.cats}}, function(err, cats) {
-	if(err) res.send(err);
-	    
-	res.render('profile.ejs', {
-	    user : req.user, // get the user out of session and pass to template
-            viewUser : req.user,
-	    cats: cats
-	});
+        if(err) return res.send(err);
+
+        Comment.find({'_id': { $in: req.user.comments}}, function(err, comments) {
+            if(err) return res.send(err);
+        	    
+        	res.render('profile.ejs', {
+        	    user : req.user, // get the user out of session and pass to template
+                viewUser : req.user,
+
+        	    cats: cats,
+                comments: comments,
+        	});
+        });
     });
 };
 
@@ -67,18 +73,23 @@ exports.search = function (req, res) {
 
 exports.singleUser = function (req, res) {
     User.findById(req.params.id, function(err, user) {
-        if(err) res.send(err);
+        if(err) return res.send(err);
 	
 		Cat.find({'_id': { $in: user.cats}}, function(err, cats) {
-			if(err) res.send(err);
-	    
-			res.render('profile.ejs', {
-			viewUser: user,
-			user : req.user,
+			if(err) return res.send(err);
 
-			cats: cats,
-			});
-		});
+            Comment.find({'_id': { $in: user.comments}}, function(err, comments) {
+                if(err) return res.send(err);
+    	    
+    			res.render('profile.ejs', {
+        			viewUser: user,
+        			user : req.user,
+
+        			cats: cats,
+                    comments: comments,
+    			});
+            });
+        });
     });
 };
 
@@ -199,14 +210,14 @@ exports.rate = function(req, res) {
 
 // post request that comments on a user's profile
 exports.comment = function(req, res) {
-    User.findById(req.params.id, function(err, targetUser) {
+    User.findById(req.params.id, function(err, user) {
         if (err) return res.send(err);
 
         if (!user) return res.send('Error: no such user.');
 
         var comment = new Comment();
 
-        comment.targetUserId = targetUser._id;
+        comment.targetUserId = user._id;
         comment.sourceUserId = req.user._id;
         comment.sourceUserName = req.user.displayName;
         comment.text = req.body.comment;
@@ -214,12 +225,12 @@ exports.comment = function(req, res) {
         comment.save(function(err) {
             if (err) return res.send(err);
 
-            targetUser.comments.push(comment._id);
-            targetUser.markModified('comments');
-            targetUser.save(function(err) {
+            user.comments.push(comment._id);
+            user.markModified('comments');
+            user.save(function(err) {
                 if (err) return res.send(err);
 
-                res.redirect('/users/' + targetUser._id);
+                res.redirect('/users/' + user._id);
             });
         });
     });
