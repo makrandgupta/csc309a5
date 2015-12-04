@@ -97,12 +97,12 @@
 		</form>
 	</div>
 
-	<% comments.forEach(function(comment) {%>
+	<% for (i = comments.length - 1; i >= 0; i--) {%>
 		<div class="row">
-			By <a href="/users/<%=comment.sourceUserId%>"><%=comment.sourceUserName%></a>:<br>
-			<%=comment.text%>
+			By <a href="/users/<%=comments[i].sourceUserId%>"><%=comments[i].sourceUserName%></a>:<br>
+			<%=comments[i].text%><br><br>
 		</div>
-	<%});%>
+	<%}%>
 
 </div>
 </body>

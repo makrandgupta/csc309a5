@@ -78,7 +78,7 @@ exports.singleUser = function (req, res) {
 		Cat.find({'_id': { $in: user.cats}}, function(err, cats) {
 			if(err) return res.send(err);
 
-            Comment.find({'_id': { $in: req.user.comments}}, function(err, comments) {
+            Comment.find({'_id': { $in: user.comments}}, function(err, comments) {
                 if(err) return res.send(err);
     	    
     			res.render('profile.ejs', {
