@@ -29,13 +29,19 @@ exports.allUsers = function (req, res) {
 
 exports.me = function (req, res) {
     Cat.find({'_id': { $in: req.user.cats}}, function(err, cats) {
-	if(err) res.send(err);
-	    
-	res.render('profile.ejs', {
-	    user : req.user, // get the user out of session and pass to template
-            viewUser : req.user,
-	    cats: cats
-	});
+        if(err) return res.send(err);
+
+        Comment.find({'_id': { $in: req.user.comments}}, function(err, comments) {
+            if(err) return res.send(err);
+        	    
+        	res.render('profile.ejs', {
+        	    user : req.user, // get the user out of session and pass to template
+                viewUser : req.user,
+
+        	    cats: cats,
+                comments: comments,
+        	});
+        });
     });
 };
 
@@ -64,18 +70,23 @@ exports.search = function (req, res) {
 
 exports.singleUser = function (req, res) {
     User.findById(req.params.id, function(err, user) {
-        if(err) res.send(err);
+        if(err) return res.send(err);
 	
 		Cat.find({'_id': { $in: user.cats}}, function(err, cats) {
-			if(err) res.send(err);
-	    
-			res.render('profile.ejs', {
-			viewUser: user,
-			user : req.user,
+			if(err) return res.send(err);
 
-			cats: cats,
-			});
-		});
+            Comment.find({'_id': { $in: req.user.comments}}, function(err, comments) {
+                if(err) return res.send(err);
+    	    
+    			res.render('profile.ejs', {
+        			viewUser: user,
+        			user : req.user,
+
+        			cats: cats,
+                    comments: comments,
+    			});
+            });
+        });
     });
 };
 
