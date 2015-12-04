@@ -37,11 +37,11 @@ var upload = multer({
 router.get('/', userController.allUsers);
 router.get('/me', userController.me);
 router.get('/me/edit', userController.editMe);
-router.get('/:id', userController.singleUser); //merge /profile into
-router.get('/edit/:id', userController.editUser); //remove internal api reference
+router.get('/:id', userController.singleUser);
+router.get('/edit/:id', userController.editUser);
 router.get('/rate/:id/:rating', userController.rate);
-// router.post('/', userController.create);
 router.post('/:id', upload.single('picture'), userController.update);
+router.post('/comment/:id', userController.comment);
 
 //admin endpoints
 

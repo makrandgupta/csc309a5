@@ -1,10 +1,9 @@
-/**
- * Created by makrand on 11/22/15.
- */
 'use strict';
 
 var User = require('../../models/user.js');
 var Cat = require('../../models/cat.js');
+var Comment = require('../../models/comment.js');
+
 var request = require('request');
 var multer= require('multer');
 var fs = require('fs');
@@ -17,7 +16,6 @@ exports.allUsers = function (req, res) {
     User.find(function(err, users) {
         if(err) res.send(err);
         // return the users list
-		console.log(users);
         res.render('home.ejs', {
             users : users,
             user : req.user
@@ -88,41 +86,6 @@ exports.editUser = function (req, res) {
 
     });
 };
-
-/*
-* Add new user
-* 
-
-exports.create = function (req, res) {
-    var user = new User();//new instance of User model
-
-    //set user info from req
-    user.name = req.body.name;
-    user.username = req.body.username;
-    user.password = req.body.password;
-    user.isCatWalker = true;
-	user.markModified('isCatWalker');
-    user.cats = [];
-	user.rating = 0;
-	user.ratings = {};
-	user.ratingNum = 0;
-
-    //save and check for errors 
-    user.save(function(err){
-		console.log("Is CatWalker: " + user.isCatWalker);
-        if(err){
-            // duplicate entry
-            if(err.code == 11000)
-                return res.json({success: false, message: 'A user with that username already exists'});
-            else
-                return res.send(err);
-        }
-
-        res.json({success: true, message: 'User created!'});
-    });
-};
-
-*/
 
 /*
 * Update user
@@ -220,4 +183,8 @@ exports.rate = function(req, res) {
 			res.redirect('/users/'+req.params.id);
 		});
     });
+}
+
+exports.comment = function(req, res) {
+    // TODO
 }
