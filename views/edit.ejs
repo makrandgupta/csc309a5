@@ -69,6 +69,14 @@
 			<input name="phone" type="text" class="form-control" value="<%= editUser.phone %>">
 		</div>
 	</div>
+	
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Walker Status</label>
+		<div class="col-sm-6">
+			<input name="walker" type="checkbox" <%=editUser.isCatWalker? "Checked" : ""%>> I want to be listed as a cat walker
+			</input>
+		</div>
+	</div>
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label">New Picture</label>
