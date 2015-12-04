@@ -80,8 +80,6 @@ exports.singleUser = function (req, res) {
 
             Comment.find({'_id': { $in: req.user.comments}}, function(err, comments) {
                 if(err) return res.send(err);
-
-                console.log(comments); // TODO TEST
     	    
     			res.render('profile.ejs', {
         			viewUser: user,
@@ -223,8 +221,6 @@ exports.comment = function(req, res) {
         comment.sourceUserId = req.user._id;
         comment.sourceUserName = req.user.displayName;
         comment.text = req.body.comment;
-
-        console.log(req.body); // TODO TEST
 
         comment.save(function(err) {
             if (err) return res.send(err);
