@@ -89,7 +89,9 @@
 	<div class="row">
 		<%
 		if(typeof viewUser !=="undefined"){
-			if(user == viewUser)%>
+			if(user._id == viewUser._id)%>
+				<%=user._id%><br>
+				<%=viewUser._id%><br>
 				<a href="/cats/new/<%= viewUser._id%>">New cat</a>
 		<%}%>
 	</div>

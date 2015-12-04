@@ -17,7 +17,6 @@ exports.allUsers = function (req, res) {
     User.find(function(err, users) {
         if(err) res.send(err);
         // return the users list
-		console.log(users);
         res.render('home.ejs', {
             users : users,
             user : req.user
