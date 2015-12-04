@@ -44,7 +44,7 @@
 		<tbody>
 			<% users.forEach(function(user){%>
 			    
-				<tr onclick="window.document.location='/users/<%= user._id%>'">
+				<tr>
 					<td><a href="/users/<%= user._id%>"><%= user.local.email%></a></td>
 					<td><%= user.displayName%></td>
 					<td><%if(user.isCatWalker === true){%>

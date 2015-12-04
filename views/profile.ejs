@@ -1,5 +1,4 @@
-<!-- views/profile.ejs -->
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 	<% include partials/head %>
@@ -17,32 +16,31 @@
 			if(user.accountType === "admin")
 				var adminControls = true;
 		}
-		user = viewUser;
 	}%>
 
 	<div class="page-header text-center">
-		<h1><%= user.displayName%></h1>
+		<h1><%= viewUser.displayName%></h1>
 	</div>
 
 	<div class="row">
 	
 		<!-- LOCAL INFORMATION -->
 		<div class="row col-md-2 col-md-offset-1">
-		<img src="<%= user.picture%>" class="img-responsive" style="max-height:200px;">
+		<img src="<%= viewUser.picture%>" class="img-responsive" style="max-height:200px;">
 		</div>
 		<div class="row col-md-4 col-md-offset-1">
 			<span></span>
 			<div class="row col-md-6 col-md-offset-1">
 				<h3><span class="fa fa-user"></span> </h3>
 				<p>
-					<strong>Email</strong>: <%= user.local.email %><br>
-					<strong>Description</strong>: <%= user.description %><br>
-					<strong>Phone #:</strong> <%= user.phone %><br>
+					<strong>Email</strong>: <%= viewUser.local.email %><br>
+					<strong>Description</strong>: <%= viewUser.description %><br>
+					<strong>Phone #:</strong> <%= viewUser.phone %><br>
 					<%
-					if(user.isCatWalker) {%>
+					if(viewUser.isCatWalker) {%>
 						<strong>Rating:</strong>
-						<% if(user.rating != 0) {%>
-							<%= user.rating%>
+						<% if(viewUser.rating != 0) {%>
+							<%= viewUser.rating%>
 						<%} else {%>
 							unrated
 						<%}%>/ 5 stars<br>
@@ -60,8 +58,8 @@
 	</div>
 	
 	<div class="page-header text-center">
-		<% if (typeof user.displayName !=="undefined"){%>
-			<h1><%= user.displayName%>'s cats</h1>
+		<% if (typeof viewUser.displayName !=="undefined"){%>
+			<h1><%= viewUser.displayName%>'s cats</h1>
 		<% } else {%>
 			<h1>User's cats</h1>
 		<%}%>
@@ -87,12 +85,8 @@
 	</div>
 	
 	<div class="row">
-		<%
-		if(typeof viewUser !=="undefined"){
-			if(user._id == viewUser._id)%>
-				<%=user._id%><br>
-				<%=viewUser._id%><br>
-				<a href="/cats/new/<%= viewUser._id%>">New cat</a>
+		<%if(String(user._id) == String(viewUser._id)){%>
+			<a href="/cats/new/<%= viewUser._id%>">New cat</a>
 		<%}%>
 	</div>
 

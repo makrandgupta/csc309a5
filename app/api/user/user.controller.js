@@ -65,7 +65,8 @@ exports.singleUser = function (req, res) {
 			res.render('profile.ejs', {
 			viewUser: user,
 			user : req.user,
-			cats: cats
+
+			cats: cats,
 			});
 		});
     });
