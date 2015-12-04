@@ -16,6 +16,7 @@ var userSchema = mongoose.Schema({
 	picture	     : String,
 	accountType  : String, //valid types: {user, admin, superAdmin}
 	cats	     : [String], //array of ids
+	comments	 : [String], //array of ids
 	phone        : String,
 	rating       : Number,  // Average rating
 	ratings      : [{user: String, rating: Number}],  // Existing ratings associated w/ id, so we can change them
