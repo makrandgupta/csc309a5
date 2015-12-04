@@ -138,8 +138,13 @@ exports.update = function(req, res) {
             //update the user info if new
             if(req.body.displayName) user.displayName = req.body.displayName;
             if(req.body.description) user.description = req.body.description;
-			if(req.body.phone) user.phone = req.body.phone;
+	    if(req.body.phone) user.phone = req.body.phone;
             if(req.body.password) user.local.password = user.generateHash(req.body.password);
+	    if(req.body.walker)
+		user.isCatWalker = true;
+	    else
+		user.isCatWalker = false;
+	    
 
             if(req.file){
                 if(req.file.mimetype === 'image/jpeg' || req.file.mimetype === 'image/bmp' || req.file.mimetype === 'image/png'){
