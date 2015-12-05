@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+	<% include partials/head %>
+</head>
+<body>
+<div class="container">
+	<header>
+		<% include partials/header %>
+	</header>
+	<div class="jumbotron text-center">
+		<form class="form-horizontal" action="/cats/search" method="post">
+	
+			<!-- Search box-->
+			<div class="form-group">
+				<div class="col-sm-2"></div>
+			
+				<!--Search button-->
+				<div class="col-sm-1">
+					<button type="submit" class="btn btn-default">Search</button>
+				</div>
+			
+				<!--Search input-->
+				<div class="col-sm-6">
+					<input name="name" type="text" class="form-control" placeholder="Name">
+				</div>
+			</div>
+
+			<!--Search options-->
+			<div class="form-group">
+				<label class="col-sm-3 control-label">Needs walker?</label>
+				<div class="col-sm-6">
+
+					<!-- All cats-->
+					<input name="walker" type="radio" value="all">&nbsp All cats</input>
+					&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+			
+					<!-- Cats that need walkers-->
+					<input name="walker" type="radio" value="needsWalker">&nbsp Cats that need walkers</input>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">Age</label>
+				<div class="col-sm-6">
+
+					<!-- All users-->
+					<select name="age">
+						<option value="0">Less than 1</option>
+						<% for (i = 1; i < 15; i++) {%>
+							<option value="<%=i%>"><%=i%></option>
+						<%}%>
+						<option value="15">15 or older</option>
+					</select>
+				</div>
+			</div>
+		</form>
+	</div>

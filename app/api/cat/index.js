@@ -15,6 +15,9 @@ var upload = multer({
 
 var router = express.Router();
 
+router.get('/search', catController.search);
+router.post('/search', catController.searchResults);
+
 // TODO: check permissions before performing actions
 
 router.get('/edit/:catid', catController.getCatEditPage);
