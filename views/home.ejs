@@ -56,7 +56,7 @@
 					<%if(adminControls === true){%>
 						<td>
 							<%if(user.accountType !== "superAdmin"){%>
-							<a href="/users/admin/edit/<%=user._id%>" class="btn btn-default">Edit</a>
+							<a href="/users/edit/<%=user._id%>" class="btn btn-default">Edit</a>
 							<a href="/users/delete/<%=user._id%>" class="btn btn-default">Delete</a>
 							<%}%>
 							<%if(superAdminControls === true && user.accountType !== "superAdmin"){%>
