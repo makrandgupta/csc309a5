@@ -63,8 +63,17 @@ exports.search = function(req, res) {
 * Search results
 * */
 exports.searchResults = function (req, res) {
-    console.log(req.body);
-    res.redirect('/');
+    var query = {"name": {$regex: req.body.name, $options: "i"},
+        "age": {$gte: Number(req.body.minage), $lte: Number(req.body.maxage)}};
+    if (req.body.walker && req.body.walker == 'needsWalker') {
+        query.needsWalker = true;
+    }
+    Cat.find(query, function(err, cats) {
+
+        res.render('catresult.ejs',{
+            cats: cats
+        });
+    });
 };
 
 // Create a new cat given a user id, and redirect to 'edit cat' page.
