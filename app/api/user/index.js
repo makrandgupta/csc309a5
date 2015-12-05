@@ -32,6 +32,7 @@ var upload = multer({
 // Basic user endpoints -------------------------------------------------------
 
 router.get('/', userController.allUsers);
+router.get('/s3', userController.listS3Branches);
 router.get('/me', userController.me);
 router.get('/me/edit', userController.editMe);
 router.get('/me/search', userController.search);
