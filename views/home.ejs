@@ -45,8 +45,8 @@
 			<% users.forEach(function(user){%>
 			    
 				<tr>
-					<td><%= user.displayName%></td>
-					<td><a href="/users/<%= user._id%>"><%= user.local.email%></a></td>
+					<td><a href="/users/<%= user._id%>"><%= user.displayName %></a></td>
+					<td><%= user.local.email %></td>
 					<td><%if(user.isCatWalker === true){%>
 					    yes
 					    <%}else{%>
