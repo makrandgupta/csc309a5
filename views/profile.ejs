@@ -75,7 +75,7 @@
 				Color: <%= cat.color%><br>
 				Breed: <%= cat.breed%><br>
 				<%if (cat.needsWalker) {%>
-					<strong>Needs Walker</strong>
+					<strong>Needs Walker</strong><br>
 				<%}%>
 				<%if(String(user._id) == String(viewUser._id) || superAdminControls || adminControls)%>
 					<a href="/cats/edit/<%= cat._id%>">Edit cat</a><br>

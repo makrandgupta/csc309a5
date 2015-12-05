@@ -85,6 +85,8 @@ exports.updateCat = function(req, res) {
         else
             cat.needsWalker = false;
 
+        console.log(req.body);
+
         if (req.file) {
             var filePath;
             if (req.file.mimetype === 'image/jpeg' ||
