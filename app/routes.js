@@ -1,14 +1,5 @@
 'use strict';
 
-// router middleware to make sure user is logged in
-function isLoggedIn(req, res, next) {
-    // if user is authenticated in the session, carry on
-    if (req.isAuthenticated()) return next();
-
-    // if they aren't redirect them to the home page
-    res.redirect('/');
-}
-
 module.exports = function(app, passport) {
     app.get('/', function(req, res) {
         if (req.isAuthenticated()) return res.redirect('/users');
@@ -46,6 +37,15 @@ module.exports = function(app, passport) {
         failureFlash : true // allow flash messages
     }));
 
+    // route for facebook authentication and login
+    app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
+
+    // handle the callback after facebook has authenticated the user
+    app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+        successRedirect: '/',
+        failureRedirect: '/'
+    }));
+
     //logout
     app.get('/logout', function(req, res) {
         req.logout();
@@ -58,3 +58,12 @@ module.exports = function(app, passport) {
     app.use('/cats', isLoggedIn, require('./api/cat'));
     app.use('/messages', isLoggedIn, require('./api/message'));
 };
+
+// router middleware to make sure user is logged in
+function isLoggedIn(req, res, next) {
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated()) return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}

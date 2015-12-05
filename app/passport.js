@@ -1,9 +1,17 @@
 'use strict';
 
 var passportLocal = require('passport-local');
+var passportFacebook = require('passport-facebook');
 var User = require('./models/user');
 
 var LocalStrategy = passportLocal.Strategy;
+var FacebookStrategy = passportFacebook.Strategy;
+
+var facebookAuth = {
+    'clientID' : '846443832143866',
+    'clientSecret' : '2f922ce98013e2988fb95bccc60d5c77',
+    'callbackURL' : 'http://localhost:3000/auth/facebook/callback'
+};
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -64,24 +72,14 @@ module.exports = function(passport) {
                         console.log('its empty');
                         newUser.accountType = 'superAdmin';
                     }
-
-                    var imgPath = __dirname;
-                    imgPath = imgPath.replace("app/api/misc", "views/assets/user_pictures/default.png");
 					
 					// set the user's local credentials
-					newUser.local.email = email;
-					newUser.picture = imgPath;
-					newUser.displayName = email;
-					newUser.description = '';
-					newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
-                    newUser.cats = [];
-                    newUser.comments = [];
-                    newUser.messages = [];
-                    newUser.rating = 0;
-                    newUser.ratings = [];
-                    newUser.markModified('ratings');
-                    newUser.ratingNum = 0;
-                    newUser.isCatWalker = false;
+                    newUser.local.email = email;
+                    // use the generateHash function in our user model
+                    newUser.local.password = newUser.generateHash(password);
+
+                    // set defaults
+					setUserDefaults(newUser, email);
                     
                     // save the user
                     newUser.save(function(err) {
@@ -132,4 +130,70 @@ module.exports = function(passport) {
             return done(null, user);
         });
     }));
+
+    // =========================================================================
+    // FACEBOOK LOGIN ==========================================================
+    // =========================================================================
+
+    passport.use(new FacebookStrategy({
+        // pull in our app id and secret from our auth.js file
+        clientID : facebookAuth.clientID,
+        clientSecret : facebookAuth.clientSecret,
+        callbackURL : facebookAuth.callbackURL
+    },
+    // facebook will send back the token and profile
+    function(token, refreshToken, profile, done) {
+        // asynchronous
+        process.nextTick(function() {
+            // find the user in the database based on their facebook id
+            User.findOne({'facebook.id': profile.id}, function(err, user) {
+                // if there is an error, stop everything and return that
+                // ie an error connecting to the database
+                if (err) return done(err);
+
+                // if the user is found, then log them in
+                if (user) return done(null, user); // user found, return that user
+
+                // if there is no user found with that facebook id, create them
+                var newUser = new User();
+
+                console.log(profile); // TODO DEBUG
+
+                // set all of the facebook information in our user model
+                newUser.facebook.id = profile.id; // set the users facebook id                   
+                newUser.facebook.token = token; // we will save the token that facebook provides to the user                    
+                newUser.facebook.name = profile.displayName; // look at the passport user profile to see how names are returned
+                newUser.facebook.email = profile.email;
+
+                // set defaults
+                setUserDefaults(newUser, newUser.facebook.name);
+
+                // save our user to the database
+                newUser.save(function(err) {
+                    if (err) return done(err);
+
+                    // if successful, return the new user
+                    return done(null, newUser);
+                });
+            });
+        });
+    }));
 };
+
+function setUserDefaults(newUser, displayName) {
+    var imgPath = __dirname;
+    imgPath = imgPath.replace("app/api/misc", "views/assets/user_pictures/default.png");
+
+    // set the user's local credentials
+    newUser.picture = imgPath;
+    newUser.displayName = displayName;
+    newUser.description = '';
+    newUser.cats = [];
+    newUser.comments = [];
+    newUser.messages = [];
+    newUser.rating = 0;
+    newUser.ratings = [];
+    newUser.markModified('ratings');
+    newUser.ratingNum = 0;
+    newUser.isCatWalker = false;
+}
