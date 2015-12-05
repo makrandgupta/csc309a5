@@ -11,42 +11,42 @@
 	
 	<!--Enclose search interface with grey background-->
 	<div class="jumbotron text-center">
-		<form class="form-horizontal" action="/users/<%= editUser._id %>" method="post" enctype="multipart/form-data">
-		<input name="method" type="hidden" value="put">
+		<form class="form-horizontal" action="/search%>" method="post" enctype="multipart/form-data">
+			<input name="method" type="hidden" value="put">
 	
-		<!-- Search box-->
-		<div class="form-group">
-			<div class="col-sm-2">
-			</div>
+			<!-- Search box-->
+			<div class="form-group">
+				<div class="col-sm-2">
+				</div>
 			
-			<!--Search button-->
-			<div class="col-sm-1">
-				<a href="/login" class="btn btn-default">Login</a>
-			</div>
+				<!--Search button-->
+				<div class="col-sm-1">
+					<button class="btn btn-default">Search</button>
+				</div>
 			
-			<!--Search input-->
-			<div class="col-sm-6">
-				<input name="displayName" type="text" class="form-control" value="">
+				<!--Search input-->
+				<div class="col-sm-6">
+					<input name="displayName" type="text" class="form-control" value="">
+				</div>
 			</div>
-		</div>
 
-		<!--Search options-->
-		<div class="form-group">
-			<label class="col-sm-3 control-label"></label>
-			<div class="col-sm-6">
+			<!--Search options-->
+			<div class="form-group">
+				<label class="col-sm-3 control-label"></label>
+				<div class="col-sm-6">
 
-				<!-- All users-->
-				<input name="option" type="radio">&nbsp All Users</input>
-				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<!-- All users-->
+					<input name="option" type="radio">&nbsp All Users</input>
+					&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 			
-				<!-- All Cat-Walkers-->
-				<input name="option" type="radio">&nbsp All Cat-Walkers</input>
-				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<!-- All Cat-Walkers-->
+					<input name="option" type="radio">&nbsp All Cat-Walkers</input>
+					&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 				
-				<!-- All Non-Cat-Walkers-->
-				<input name="option" type="radio">&nbsp All Non-Cat-Walkers</input>
+					<!-- All Non-Cat-Walkers-->
+					<input name="option" type="radio">&nbsp All Non-Cat-Walkers</input>
+				</div>
 			</div>
-		</div>
 		</form>
 	</div>
 </div>

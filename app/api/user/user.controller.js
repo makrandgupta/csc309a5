@@ -66,6 +66,14 @@ exports.search = function (req, res) {
 };
 
 /*
+* Search results.
+* */
+
+exports.searchResults = function (req, res) {
+	res.end();
+};
+
+/*
 * Get single user information
 * */
 
