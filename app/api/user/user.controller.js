@@ -61,7 +61,6 @@ exports.editMe = function (req, res) {
 exports.search = function (req, res) {
 	res.render('search.ejs', {
 		me: req.user,
-		editUser: req.user
 	});
 };
 
@@ -71,7 +70,7 @@ exports.search = function (req, res) {
 
 exports.searchResults = function (req, res) {
 	console.log(req.body);
-	res.json({message: "posted"});
+	res.redirect('/');
 };
 
 /*
