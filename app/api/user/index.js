@@ -39,6 +39,9 @@ router.get('/edit/:id', userController.editUser);
 router.get('/rate/:id/:rating', userController.rate);
 router.post('/comment/:id', userController.comment);
 
+// Search
+router.post('/search', userController.searchResults);
+
 // Messaging
 router.get('/inbox', userController.getInboxPage);
 router.get('/message/:id', userController.getMessagePage);
