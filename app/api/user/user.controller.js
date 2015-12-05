@@ -301,7 +301,7 @@ exports.deleteMessage = function(req, res) {
         if (message.targetUserId != req.user._id) return res.send('Not yours.');
 
         // Remove the message from the DB.
-        Message.removeById(message._id, function(err) {
+        Message.remove(message._id, function(err) {
             if (err) return res.send(err);
 
             // Remove the message's id from the user's messages.
