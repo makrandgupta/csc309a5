@@ -4,23 +4,21 @@
     <div class="navbar-header">
         <a class="navbar-brand" href="/">
             <span>
-                <img src="/views/assets/user_pictures/cat_icon.png" style="max-height: 25px"/>
+                <img src="/views/assets/user_pictures/cat_icon.png"
+                style="max-height: 25px"/>
             </span>
             Catwalk
         </a>
     </div>
-    <div>
-        <% if (typeof me !== "undefined") { %>
-            <ul class="nav navbar-nav">
-                <li><a href="/users/me/edit">Edit Profile</a></li>
-                <li><a href="/users/search">Search Users</a></li>
-                <li><a href="/cats/search">Search Cats</a></li>
-            </ul>
-        <% } %>
+    <% if (typeof me !== "undefined") { %> <div>
+        <ul class="nav navbar-nav">
+            <li><a href="/users/me/edit">Edit Profile</a></li>
+            <li><a href="/users/search">Search Users</a></li>
+            <li><a href="/cats/search">Search Cats</a></li>
+        </ul>
         <ul class="nav navbar-nav navbar-right">
-        <% if (typeof me !== "undefined") { %>
             <li>
-                <img src="<%= me.local.picture%>"
+                <img src="<%= me.local.picture %>"
                 class="img-responsive img-circle"
                 style="max-height:40px; padding-top:10px;"/>
             </li>
@@ -33,18 +31,8 @@
             </a></li>
             <li><a href="/logout">
                 Logout
-            </a></li> 
-        <% } else { %>
-            <li><a href="/signup">
-                <span class="glyphicon glyphicon-user"></span>
-                Sign Up
             </a></li>
-            <li><a href="/login">
-                <span class="glyphicon glyphicon-log-in"></span>
-                Login
-            </a></li>
-        <% } %>
         </ul>
-    </div>
+    </div> <% } %>
 </div>
 </nav>
