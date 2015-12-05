@@ -38,23 +38,12 @@ router.get('/search', userController.search);
 router.get('/edit/:id', userController.editUser);
 router.get('/rate/:id/:rating', userController.rate);
 router.post('/comment/:id', userController.comment);
-<<<<<<< HEAD
+router.get('/:id', userController.singleUser);
+router.post('/:id', upload.single('picture'), userController.update);
+
 
 // Search
 router.post('/search', userController.searchResults);
-
-// Messaging
-router.get('/inbox', userController.getInboxPage);
-router.get('/message/:id', userController.getMessagePage);
-router.post('/message/:id', userController.message);
-router.get('/delete/message/:id', userController.deleteMessage);
-
-// These routes appear later so they don't accidentally match
-//   routes that have a single word; i.e. "/inbox", etc.
-=======
->>>>>>> eadc4dca86f1be4b82ed819fced1efb2cb50e926
-router.get('/:id', userController.singleUser);
-router.post('/:id', upload.single('picture'), userController.update);
 
 
 // Admin endpoints ------------------------------------------------------------
