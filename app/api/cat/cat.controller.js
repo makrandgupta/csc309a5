@@ -51,11 +51,11 @@ exports.newCat = function(req, res) {
 
         var cat = new Cat();
         cat.owner = user._id;
-	cat.name = '';
-	cat.age = '';
-	cat.weight = '';
-	cat.color = '';
-	cat.breed = '';
+	    cat.name = '';
+	    cat.age = '';
+	    cat.weight = '';
+	    cat.color = '';
+	    cat.breed = '';
         cat.save(function(err) {
             if (err) res.send(err);
 
@@ -80,6 +80,10 @@ exports.updateCat = function(req, res) {
         if (req.body.weight) cat.weight = req.body.weight;
         if (req.body.color) cat.color = req.body.color;
         if (req.body.breed) cat.breed = req.body.breed;
+        if (req.body.walker)
+            cat.needsWalker = true;
+        else
+            cat.needsWalker = false;
 
         if (req.file) {
             var filePath;

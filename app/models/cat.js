@@ -4,13 +4,14 @@ var mongoose = require('mongoose');
 
 // define the schema for our user model
 var catSchema = mongoose.Schema({
-        owner : String, //ObjectId, // user's id
+    owner : String, //ObjectId, // user's id
 	name : String,
 	age : String,
 	weight : String,
 	color : String,
 	picture : String,
-	breed : String 
+	breed : String,
+	needsWalker: Boolean
 });
 
 // methods ======================

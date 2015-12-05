@@ -65,16 +65,20 @@
 		cats.forEach(function(cat) {%>
 			<div class="row col-md-2 col-md-offset-1">
 				<img src="<%= cat.picture%>" class="img-responsive" style="max-height:200px;"><br>
-				<strong><%= cat.name%></strong><br>
+				<strong><%if (cat.name != '') {%>
+					<%=cat.name%>
+				<%} else{%>
+					Unnamed cat
+				<%}%></strong><br>
 				Age: <%= cat.age%><br>
 				Weight: <%= cat.weight%><br>
 				Color: <%= cat.color%><br>
 				Breed: <%= cat.breed%><br>
-				<%
-					if(typeof viewUser !=="undefined"){
-						if(user == viewUser || superAdminControls || adminControls)%>
-							<a href="/cats/edit/<%= cat._id%>">Edit cat</a>
+				<%if (cat.needsWalker) {%>
+					<strong>Needs Walker</strong>
 				<%}%>
+				<%if(String(user._id) == String(viewUser._id) || superAdminControls || adminControls)%>
+					<a href="/cats/edit/<%= cat._id%>">Edit cat</a><br>
 			</div>
 		<%});
 		}%>
