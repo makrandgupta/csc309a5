@@ -25,18 +25,18 @@ exports.getCatEditPage = function(req, res) {
 exports.deleteCat = function(req, res) {
     Cat.findById(req.params.catid, function(err, cat) {
         if (err) return res.send(err);
-
         if (!cat) return res.send("Error: no such cat.");
 
         // Don't let users delete others' cats.
-        if (cat.owner != req.user._id) return res.send('Auth err.');
+        if (cat.owner != req.user._id) return res.send('Not yours.');
 
-        // Find the cat's owner.
+        // Find the cat's owner, so we can redirect the user to their profile,
+        //   even after deleting the cat.
         var ownerid = cat.owner;
 
         // Remove the cat.
-        Cat.remove({_id: cat._id}, function(err) {
-            if (err) res.send(err);
+        Cat.removeById(cat._id, function(err) {
+            if (err) return res.send(err);
 
             // Remove the cat's id from the user's cats.
             var index = req.user.cats.indexOf(cat._id);
