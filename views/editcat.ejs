@@ -32,35 +32,35 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Name</label>
 		<div class="col-sm-6">
-			<input name="displayName" type="text" class="form-control" value="<%= cat.name %>">
+			<input name="name" type="text" class="form-control" value="<%= cat.name %>">
 		</div>
 	</div>
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Age</label>
 		<div class="col-sm-6">
-			<input name="description" type="text" class="form-control" value="<%= cat.age %>">
+			<input name="age" type="text" class="form-control" value="<%= cat.age %>">
 		</div>
 	</div>
 	
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Weight</label>
 		<div class="col-sm-6">
-			<input name="description" type="text" class="form-control" value="<%= cat.weight %>">
+			<input name="weight" type="text" class="form-control" value="<%= cat.weight %>">
 		</div>
 	</div>
 	
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Color</label>
 		<div class="col-sm-6">
-			<input name="description" type="text" class="form-control" value="<%= cat.color %>">
+			<input name="color" type="text" class="form-control" value="<%= cat.color %>">
 		</div>
 	</div>
 	
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Breed</label>
 		<div class="col-sm-6">
-			<input name="description" type="text" class="form-control" value="<%= cat.breed %>">
+			<input name="breed" type="text" class="form-control" value="<%= cat.breed %>">
 		</div>
 	</div>
 
@@ -71,7 +71,13 @@
 		</div>
 	</div>
 	
-	
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Needs Walker</label>
+		<div class="col-sm-6">
+			<input name="walker" type="checkbox" <%=cat.needsWalker? "Checked" : ""%>> This cat needs a Walker
+			</input>
+		</div>
+	</div>
 	
 	<div class="form-group">
 	<div class="col-sm-offset-2 col-sm-6">
