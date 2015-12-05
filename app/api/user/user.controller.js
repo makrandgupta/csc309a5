@@ -3,10 +3,7 @@
 var User = require('../../models/user.js');
 var Cat = require('../../models/cat.js');
 var Comment = require('../../models/comment.js');
-var Message = require('../../models/message.js');
 
-var request = require('request');
-var multer= require('multer');
 var fs = require('fs');
 
 /*
@@ -66,6 +63,14 @@ exports.search = function (req, res) {
 		me: req.user,
 		editUser: req.user
 	});
+};
+
+/*
+* Search results.
+* */
+
+exports.searchResults = function (req, res) {
+	res.end();
 };
 
 /*

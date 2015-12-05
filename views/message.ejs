@@ -14,7 +14,7 @@
 	<div class="row">
 		<strong>From</strong> <%=me.displayName%><br>
 		<strong>To</strong> <%target.displayName%><br><br>
-		<form class="form-horizontal" action="/users/message/<%= target._id %>" method="post">
+		<form class="form-horizontal" action="/messages/<%= target._id %>" method="post">
 		<textarea name="message" rows="4" cols="100"></textarea>
 		<button type="submit" class="btn btn-default btn-lg">Send Message</button>
 		</form>
