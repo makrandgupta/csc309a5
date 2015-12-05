@@ -15,6 +15,7 @@ exports.editUser = function (req, res) {
 
 //router.get('/delete/:id', isAdmin, adminController.delete);
 exports.delete = function (req, res) {
+        console.log('I am in the delete function');
         User.remove({
             _id: req.params.id
         }, function (err) {
