@@ -11,14 +11,9 @@ function isLoggedIn(req, res, next) {
 
 module.exports = function(app, passport) {
     app.get('/', function(req, res) {
-        if (isLoggedIn){
-            res.render('index.ejs', {
-                me: req.user
-            });
-        } else {
-            res.render('index.ejs', {
-            });
-        }
+        if (req.isAuthenticated()) return res.redirect('/users');
+        
+        res.render('index.ejs');
     });
 
     //login route

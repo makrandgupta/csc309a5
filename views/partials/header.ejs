@@ -1,36 +1,47 @@
-<!doctype html>
+<!-- <!doctype html> -->
 <nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="/"><span class="glyphicon glyphicon-user"></span> Userify</a>
-		</div>
-	<div>
-		<% if(typeof me !== "undefined"){%>
-		<ul class="nav navbar-nav">
-			<li><a href="/users">Home</a></li>
-			<li><a href="/users/me/edit">Edit Profile</a></li>
-			<li><a href="/users/search">Search</a></li>
-		</ul>
-		<%}%>	
-		<ul class="nav navbar-nav navbar-right">
-		<% if(typeof me !== "undefined"){%>
-			<li><img src="<%= me.local.picture%>" class="img-responsive img-circle" style="max-height:40px; padding-top:10px;"></li>
-			<li><a href="/users/me">Hello
-			<% if(typeof me.local.displayName !== "undefined" || me.local.displayName !== ''){%> 
-				<%=me.local.displayName%>
-			<%} if(me.local.displayName === '') {%>
-				<%=me.local.email%>
-			<%}%>!</a></li>
-			<li><a href="/messages/inbox">
-				<span class="glyphicon glyphicon-envelope"></span>
-				Inbox
-				</a></li>
-			<li><a href="/logout">Logout</a></li> 
-		<% } else { %>
-			<li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-			<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-		<%}%>	
-      </ul>
+<div class="container-fluid">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/">
+            <span class="glyphicon glyphicon-user"></span> Userify
+        </a>
     </div>
-  </div>
+    <div>
+        <% if (typeof me !== "undefined") { %>
+            <ul class="nav navbar-nav">
+                <li><a href="/users/me/edit">Edit Profile</a></li>
+                <li><a href="/users/search">Search Users</a></li>
+                <li><a href="/cats/search">Search Cats</a></li>
+            </ul>
+        <% } %>
+        <ul class="nav navbar-nav navbar-right">
+        <% if (typeof me !== "undefined") { %>
+            <li>
+                <img src="<%= me.local.picture%>"
+                class="img-responsive img-circle"
+                style="max-height:40px; padding-top:10px;"/>
+            </li>
+            <li><a href="/users/me">
+                Hello <%= me.displayName %>!
+            </a></li>
+            <li><a href="/messages/inbox">
+                <span class="glyphicon glyphicon-envelope"></span>
+                Inbox
+            </a></li>
+            <li><a href="/logout">
+                Logout
+            </a></li> 
+        <% } else { %>
+            <li><a href="/signup">
+                <span class="glyphicon glyphicon-user"></span>
+                Sign Up
+            </a></li>
+            <li><a href="/login">
+                <span class="glyphicon glyphicon-log-in"></span>
+                Login
+            </a></li>
+        <% } %>
+        </ul>
+    </div>
+</div>
 </nav>
