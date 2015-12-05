@@ -11,17 +11,15 @@
 	
 	<!--Enclose search interface with grey background-->
 	<div class="jumbotron text-center">
-		<form class="form-horizontal" action="/search%>" method="post" enctype="multipart/form-data">
-			<input name="method" type="hidden" value="put">
+		<form class="form-horizontal" action="/users/search" method="post">
 	
 			<!-- Search box-->
 			<div class="form-group">
-				<div class="col-sm-2">
-				</div>
+				<div class="col-sm-2"></div>
 			
 				<!--Search button-->
 				<div class="col-sm-1">
-					<button class="btn btn-default">Search</button>
+					<button type="submit" class="btn btn-default">Search</button>
 				</div>
 			
 				<!--Search input-->
@@ -44,7 +42,7 @@
 					&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 				
 					<!-- All Non-Cat-Walkers-->
-					<input name="option" type="radio" class="form-control">&nbsp All Non-Cat-Walkers</input>
+					<input name="option" type="radio">&nbsp All Non-Cat-Walkers</input>
 				</div>
 			</div>
 		</form>

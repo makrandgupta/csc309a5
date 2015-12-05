@@ -27,20 +27,20 @@ var upload = multer({
     dest: upDest
 });
 
+// Search endpoints ----------------------------------------------------------
+router.get('/search', userController.search);
+router.post('/search', userController.searchResults);
+
 // Basic user endpoints -------------------------------------------------------
 
 router.get('/', userController.allUsers);
 router.get('/me', userController.me);
 router.get('/me/edit', userController.editMe);
-router.get('/search', userController.search);
 router.get('/edit/:id', userController.editUser);
 router.get('/rate/:id/:rating', userController.rate);
 router.post('/comment/:id', userController.comment);
 router.get('/:id', userController.singleUser);
 router.post('/:id', upload.single('picture'), userController.update);
-
-// Search
-router.post('/search', userController.searchResults);
 
 // Admin endpoints ------------------------------------------------------------
 
