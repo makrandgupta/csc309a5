@@ -290,3 +290,30 @@ exports.message = function(req, res) {
         });
     });
 }
+
+// get request that deletes a message
+exports.deleteMessage = function(req, res) {
+    Message.find({_id: req.params.id}, function(err, message) {
+        if (err) return res.send(err);
+
+        if (!message) res.send("Error: no such message.");
+
+        // Don't let users delete others' messages.
+        if (message.targetUserId != req.user._id) return res.send('Auth err.');
+
+        // Remove the message from the DB.
+        Message.remove({_id: req.params.id}, function(err) {
+            if (err) return res.send(err);
+
+            // Remove the message's id from the user's messages.
+            var index = req.user.messages.indexOf(message._id);
+            if (index > -1) req.user.messages.splice(i, 1);
+            req.user.markModified('messages');
+            req.user.save(function(err) {
+                if (err) return res.send(err);
+
+                res.redirect('/inbox');
+            });
+        });
+    });
+}
