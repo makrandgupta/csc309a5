@@ -17,7 +17,7 @@
 	<!-- Messages, sorted by most recent. -->
 	<% for (var i = messages.length - 1; i >= 0; i--) {%>
 		<div class="row">
-			<a href="/users/delete/message/<%= messages[i]._id %>"<span class="glyphicon glyphicon-remove" title="Delete this message"></span></a>
+			<a href="/messages/delete/<%= messages[i]._id %>"<span class="glyphicon glyphicon-remove" title="Delete this message"></span></a>
 			<a href="/users/<%= messages[i].sourceUserId %>">
 				<%= messages[i].sourceUserName %>
 			</a>:<br>
