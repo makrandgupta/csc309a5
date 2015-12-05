@@ -42,9 +42,22 @@
 
 			<div class="form-group">
 				<label class="col-sm-3 control-label">Age</label>
-				<div class="col-sm-6">
+				<div class="col-sm-3">
 
-					<!-- All users-->
+					<!-- minimum age-->
+					Minimum: 
+					<select name="age">
+						<option value="0">Less than 1</option>
+						<% for (i = 1; i < 15; i++) {%>
+							<option value="<%=i%>"><%=i%></option>
+						<%}%>
+						<option value="15">15 or older</option>
+					</select>
+				</div>
+				<div class="col-sm-3">
+
+					Maximum: 
+					<!-- maximum age-->
 					<select name="age">
 						<option value="0">Less than 1</option>
 						<% for (i = 1; i < 15; i++) {%>
