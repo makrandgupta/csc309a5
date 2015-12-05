@@ -35,19 +35,10 @@ router.get('/', userController.allUsers);
 router.get('/s3', userController.listS3Branches);
 router.get('/me', userController.me);
 router.get('/me/edit', userController.editMe);
-router.get('/me/search', userController.search);
+router.get('/search', userController.search);
 router.get('/edit/:id', userController.editUser);
 router.get('/rate/:id/:rating', userController.rate);
 router.post('/comment/:id', userController.comment);
-
-// Messaging
-router.get('/inbox', userController.getInboxPage);
-router.get('/message/:id', userController.getMessagePage);
-router.post('/message/:id', userController.message);
-router.get('/delete/message/:id', userController.deleteMessage);
-
-// These routes appear later so they don't accidentally match
-//   routes that have a single word; i.e. "/inbox", etc.
 router.get('/:id', userController.singleUser);
 router.post('/:id', upload.single('picture'), userController.update);
 

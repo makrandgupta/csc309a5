@@ -236,6 +236,7 @@ exports.comment = function(req, res) {
         });
     });
 }
+<<<<<<< HEAD
 
 // render the inbox page
 exports.getInboxPage = function(req, res) {
@@ -330,3 +331,5 @@ exports.listS3Branches = function (req, res){
 		}
 	});
 };
+=======
+>>>>>>> eadc4dca86f1be4b82ed819fced1efb2cb50e926

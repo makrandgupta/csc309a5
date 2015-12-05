@@ -63,10 +63,10 @@ module.exports = function(passport) {
 					if (typeof users !== 'undefined' && users.length > 0) {
 						// the array is defined and has at least one element
 						console.log('there is something');
-						newUser.local.accountType = 'user';
+						newUser.accountType = 'user';
 					} else {
 						console.log('its empty');
-						newUser.local.accountType = 'superAdmin';
+						newUser.accountType = 'superAdmin';
 					}
 
                     var imgPath = __dirname;
