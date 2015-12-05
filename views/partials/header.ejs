@@ -12,9 +12,12 @@
     </div>
     <% if (typeof me !== "undefined") { %> <div>
         <ul class="nav navbar-nav">
-            <li><a href="/users/me/edit">Edit Profile</a></li>
-            <li><a href="/users/search">Search Users</a></li>
-            <li><a href="/cats/search">Search Cats</a></li>
+            <li><a href="/users/search">
+                Search Users
+            </a></li>
+            <li><a href="/cats/search">
+                Search Cats
+            </a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li>
@@ -28,6 +31,10 @@
             <li><a href="/messages/inbox">
                 <span class="glyphicon glyphicon-envelope"></span>
                 Inbox
+            </a></li>
+            <li><a href="/users/me/edit">
+                <span class="glyphicon glyphicon-pencil"></span>
+                Edit Profile
             </a></li>
             <li><a href="/logout">
                 Logout
