@@ -306,12 +306,12 @@ exports.deleteMessage = function(req, res) {
 
             // Remove the message's id from the user's messages.
             var index = req.user.messages.indexOf(message._id);
-            if (index > -1) req.user.messages.splice(i, 1);
+            if (index > -1) req.user.messages.splice(index, 1);
             req.user.markModified('messages');
             req.user.save(function(err) {
                 if (err) return res.send(err);
 
-                res.redirect('/inbox');
+                res.redirect('/users/inbox');
             });
         });
     });
