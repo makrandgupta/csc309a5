@@ -10,10 +10,10 @@
 	</header>
 	<%
 	if(typeof viewUser !=="undefined"){
-		if(user !== viewUser){
-			if(user.accountType === "superAdmin")
+		if(me !== viewUser){
+			if(me.accountType === "superAdmin")
 				var superAdminControls = true;
-			if(user.accountType === "admin")
+			if(me.accountType === "admin")
 				var adminControls = true;
 		}
 	}%>
@@ -82,7 +82,7 @@
 				<%if (cat.needsWalker) {%>
 					<strong>Needs Walker</strong><br>
 				<%}%>
-				<%if(String(user._id) == String(viewUser._id) || superAdminControls || adminControls)%>
+				<%if(String(me._id) == String(viewUser._id) || superAdminControls || adminControls)%>
 					<a href="/cats/edit/<%= cat._id%>">Edit cat</a><br>
 			</div>
 		<%});
@@ -90,7 +90,7 @@
 	</div>
 	
 	<div class="row">
-	    <%if(String(user._id) == String(viewUser._id)){%>
+	    <%if(String(me._id) == String(viewUser._id)){%>
 		<a href="/cats/new/<%= viewUser._id%>">New cat</a>
 	    <%}%>
 	</div>

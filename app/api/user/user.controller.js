@@ -19,7 +19,7 @@ exports.allUsers = function (req, res) {
         // return the users list
         res.render('home.ejs', {
             users : users,
-            user : req.user
+            me : req.user
         });
     });
 };
@@ -36,7 +36,7 @@ exports.me = function (req, res) {
             if(err) return res.send(err);
         	    
         	res.render('profile.ejs', {
-        	    user : req.user, // get the user out of session and pass to template
+        	    me : req.user, // get the user out of session and pass to template
                 viewUser : req.user,
 
         	    cats: cats,
@@ -52,7 +52,7 @@ exports.me = function (req, res) {
 
 exports.editMe = function (req, res) {
     res.render('edit.ejs', {
-        user: req.user,
+        me: req.user,
         editUser: req.user
     });
 };
@@ -63,7 +63,7 @@ exports.editMe = function (req, res) {
 
 exports.search = function (req, res) {
 	res.render('search.ejs', {
-		user: req.user,
+		me: req.user,
 		editUser: req.user
 	});
 };
@@ -84,7 +84,7 @@ exports.singleUser = function (req, res) {
     	    
     			res.render('profile.ejs', {
         			viewUser: user,
-        			user : req.user,
+        			me : req.user,
 
         			cats: cats,
                     comments: comments,
@@ -103,7 +103,7 @@ exports.editUser = function (req, res) {
         if(err) res.send(err);
 
         res.render('edit.ejs', {
-            user: req.user,
+            me: req.user,
             editUser: user
         });
 
@@ -286,6 +286,32 @@ exports.message = function(req, res) {
                 if (err) return res.send(err);
 
                 res.redirect('/users/' + user._id);
+            });
+        });
+    });
+}
+
+// get request that deletes a message
+exports.deleteMessage = function(req, res) {
+    Message.findById(req.params.id, function(err, message) {
+        if (err) return res.send(err);
+        if (!message) return res.send("Error: no such message.");
+
+        // Don't let users delete others' messages.
+        if (message.targetUserId != req.user._id) return res.send('Not yours.');
+
+        // Remove the message from the DB.
+        Message.remove({_id: message._id}, function(err) {
+            if (err) return res.send(err);
+
+            // Remove the message's id from the user's messages.
+            var index = req.user.messages.indexOf(message._id);
+            if (index > -1) req.user.messages.splice(index, 1);
+            req.user.markModified('messages');
+            req.user.save(function(err) {
+                if (err) return res.send(err);
+
+                res.redirect('/users/inbox');
             });
         });
     });

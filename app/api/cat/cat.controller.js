@@ -23,21 +23,31 @@ exports.getCatEditPage = function(req, res) {
 
 // Delete a particular cat.
 exports.deleteCat = function(req, res) {
-    // Find the cat.
     Cat.findById(req.params.catid, function(err, cat) {
-        if (err) res.send(err);
+        if (err) return res.send(err);
+        if (!cat) return res.send("Error: no such cat.");
 
-        if (!cat) res.send("Error: no such cat.");
+        // Don't let users delete others' cats.
+        if (cat.owner != req.user._id) return res.send('Not yours.');
 
-        // Find the cat's owner.
+        // Find the cat's owner, so we can redirect the user to their profile,
+        //   even after deleting the cat.
         var ownerid = cat.owner;
 
         // Remove the cat.
         Cat.remove({_id: cat._id}, function(err) {
-            if (err) res.send(err);
+            if (err) return res.send(err);
 
-            // Redirect back to the user's profile.
-            res.redirect('/users/' + ownerid);
+            // Remove the cat's id from the user's cats.
+            var index = req.user.cats.indexOf(cat._id);
+            if (index > -1) req.user.cats.splice(i, 1);
+            req.user.markModified('cats');
+            req.user.save(function(err) {
+                if (err) return res.send(err);
+
+                // Redirect back to the user's profile.
+                res.redirect('/users/' + ownerid);
+            });
         });
     });
 };
