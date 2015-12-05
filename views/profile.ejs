@@ -17,7 +17,12 @@
 				var adminControls = true;
 		}
 	}%>
-
+	<div style="float:right">
+		<a href="/users/message/<%=viewUser._id%>">
+			<span class="glyphicon glyphicon-envelope"></span>
+			Message <%=viewUser.displayName%>
+		</a>
+	</div>
 	<div class="page-header text-center">
 		<h1><%= viewUser.displayName%></h1>
 	</div>
@@ -91,20 +96,23 @@
 	</div>
 	
 	<div class="page-header">
-	    <h3>Comments for <%= viewUser.displayName%></h3>
+	    <h3><span class="glyphicon glyphicon-comment"></span> Comments for <%= viewUser.displayName%></h3>
 	</div>
 	<div class="row">
 		Leave a comment!
 		<form class="form-horizontal" action="/users/comment/<%= viewUser._id %>" method="post">
 		<textarea name="comment" rows="4" cols="100"></textarea>
-		<button type="submit" class="btn btn-default btn-lg btn-block">Post Comment</button>
+		<button type="submit" class="btn btn-default btn-lg">Post Comment</button>
 		</form>
 	</div>
 
 	<% for (i = comments.length - 1; i >= 0; i--) {%>
 		<div class="row">
 			By <a href="/users/<%=comments[i].sourceUserId%>"><%=comments[i].sourceUserName%></a>:<br>
-			<%=comments[i].text%><br><br>
+			<div style="border: 2px solid grey; border-radius: 5px;">
+				<%=comments[i].text%>
+			</div>
+			<br><br>
 		</div>
 	<%}%>
 
