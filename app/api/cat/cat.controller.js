@@ -1,5 +1,3 @@
-// /app/api/cat/cat.controller.js
-
 'use strict';
 
 var User = require('../../models/user.js');

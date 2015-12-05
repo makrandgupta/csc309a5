@@ -1,5 +1,3 @@
-// app/models/message.js
-
 'use strict';
 
 var mongoose = require('mongoose');
