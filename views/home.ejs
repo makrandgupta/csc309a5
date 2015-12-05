@@ -12,13 +12,13 @@
 		var adminControls = false;
 		var adminMessage = '';
 		var superAdminControls = false;
-		if(user.accountType === "superAdmin"){
+		if(me.accountType === "superAdmin"){
 			superAdminControls = true;
 			adminControls = true;
 			adminMessage = 'Super Admin';
 
 		}
-		if(user.accountType === "admin") {
+		if(me.accountType === "admin") {
 			adminControls = true;
 			adminMessage = 'Admin';
 		}

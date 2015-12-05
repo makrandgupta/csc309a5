@@ -4,7 +4,7 @@
 			<a class="navbar-brand" href="/"><span class="glyphicon glyphicon-user"></span> Userify</a>
 		</div>
 	<div>
-		<% if(typeof user !== "undefined"){%>
+		<% if(typeof me !== "undefined"){%>
 		<ul class="nav navbar-nav">
 			<li><a href="/users">Home</a></li>
 			<li><a href="/users/me/edit">Edit Profile</a></li>
@@ -12,13 +12,13 @@
 		</ul>
 		<%}%>	
 		<ul class="nav navbar-nav navbar-right">
-		<% if(typeof user !== "undefined"){%>
-			<li><img src="<%= user.local.picture%>" class="img-responsive img-circle" style="max-height:40px; padding-top:10px;"></li>
+		<% if(typeof me !== "undefined"){%>
+			<li><img src="<%= me.local.picture%>" class="img-responsive img-circle" style="max-height:40px; padding-top:10px;"></li>
 			<li><a href="/users/me">Hello
-			<% if(typeof user.local.displayName !== "undefined" || user.local.displayName !== ''){%> 
-				<%=user.local.displayName%>
-			<%} if(user.local.displayName === '') {%>
-				<%=user.local.email%>
+			<% if(typeof me.local.displayName !== "undefined" || me.local.displayName !== ''){%> 
+				<%=me.local.displayName%>
+			<%} if(me.local.displayName === '') {%>
+				<%=me.local.email%>
 			<%}%>!</a></li>
 			<li><a href="/logout">Logout</a></li> 
 		<% } else { %>
