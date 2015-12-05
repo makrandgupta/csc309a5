@@ -35,7 +35,7 @@ exports.deleteCat = function(req, res) {
         var ownerid = cat.owner;
 
         // Remove the cat.
-        Cat.remove(cat._id, function(err) {
+        Cat.remove({_id: cat._id}, function(err) {
             if (err) return res.send(err);
 
             // Remove the cat's id from the user's cats.
