@@ -25,7 +25,7 @@ module.exports = function(app, passport) {
         if(isLoggedIn){
             // console.log("I'm Logged in Mofo!");
             res.render('index.ejs', {
-                user: req.user
+                me: req.user
             });
         } else {
             res.render('index.ejs', {
