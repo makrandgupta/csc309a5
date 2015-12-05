@@ -50,6 +50,23 @@ exports.deleteCat = function(req, res) {
     });
 };
 
+/*
+* Get search page
+* */
+exports.search = function(req, res) {
+    res.render('searchcat.ejs', {
+        me: req.user,
+    });
+};
+
+/*
+* Search results
+* */
+exports.searchResults = function (req, res) {
+    console.log(req.body);
+    res.redirect('/');
+};
+
 // Create a new cat given a user id, and redirect to 'edit cat' page.
 exports.newCat = function(req, res) {
     User.findById(req.params.userid, function(err, user) {
