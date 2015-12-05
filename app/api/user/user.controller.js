@@ -293,16 +293,15 @@ exports.message = function(req, res) {
 
 // get request that deletes a message
 exports.deleteMessage = function(req, res) {
-    Message.find({_id: req.params.id}, function(err, message) {
+    Message.findById(req.params.id, function(err, message) {
         if (err) return res.send(err);
-
-        if (!message) res.send("Error: no such message.");
+        if (!message) return res.send("Error: no such message.");
 
         // Don't let users delete others' messages.
-        if (message.targetUserId != req.user._id) return res.send('Auth err.');
+        if (message.targetUserId != req.user._id) return res.send('Not yours.');
 
         // Remove the message from the DB.
-        Message.remove({_id: req.params.id}, function(err) {
+        Message.removeById(message._id, function(err) {
             if (err) return res.send(err);
 
             // Remove the message's id from the user's messages.
