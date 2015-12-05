@@ -1,10 +1,10 @@
-// app/models/cat.js
-// load the things we need
+'use strict';
+
 var mongoose = require('mongoose');
 
-// define the schema for our user model
+// Define the schema for cats.
 var catSchema = mongoose.Schema({
-    owner : String, //ObjectId, // user's id
+    owner : String, // user's id
 	name : String,
 	age : Number,
 	weight : String,
@@ -14,7 +14,6 @@ var catSchema = mongoose.Schema({
 	needsWalker: Boolean
 });
 
-// methods ======================
-
-// create the model for users and expose it to our app
-module.exports = mongoose.model('Cat', catSchema);
+// Create the model for cats.
+var Cat = mongoose.model('Cat', catSchema);
+module.exports = Cat;

@@ -1,5 +1,3 @@
-// app/models/comment.js
-
 'use strict';
 
 var mongoose = require('mongoose');
