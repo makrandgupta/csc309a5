@@ -28,9 +28,9 @@
 				</div>
 			</div>
 
-			<!--Search options-->
+			<!--Type options-->
 			<div class="form-group">
-				<label class="col-sm-3 control-label"></label>
+				<label class="col-sm-3 control-label">Walker Status</label>
 				<div class="col-sm-6">
 
 					<!-- All users-->
@@ -43,6 +43,31 @@
 				
 					<!-- All Non-Cat-Walkers-->
 					<input name="option" type="radio">&nbsp All Non-Cat-Walkers</input>
+				</div>
+			</div>
+
+			<!-- Rating options -->
+			<div class="form-group">
+				<label class="col-sm-3 control-label">Rating</label>
+				<div class="col-sm-3">
+
+					<!-- minimum rating-->
+					Minimum: 
+					<select name="minrating">
+						<% for (i = 1; i <=5; i++) {%>
+							<option value="<%=i%>"><%=i%></option>
+						<%}%>
+					</select>
+				</div>
+				<div class="col-sm-3">
+
+					Maximum: 
+					<!-- maximum rating-->
+					<select name="maxrating">
+						<% for (i = 1; i <=5; i++) {%>
+							<option value="<%=i%>"><%=i%></option>
+						<%}%>
+					</select>
 				</div>
 			</div>
 		</form>
