@@ -70,8 +70,7 @@ module.exports = function(passport) {
 					}
 
                     var imgPath = __dirname;
-                    imgPath = imgPath.replace("app/api/misc", "views/assets/user_pictures/");
-                    imgPath += 'default.png';
+                    imgPath = imgPath.replace("app/api/misc", "views/assets/user_pictures/default.png");
 					
 					// set the user's local credentials
 					newUser.local.email = email;
