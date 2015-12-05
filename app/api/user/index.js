@@ -34,10 +34,12 @@ var upload = multer({
 router.get('/', userController.allUsers);
 router.get('/me', userController.me);
 router.get('/me/edit', userController.editMe);
-router.get('/me/search', userController.search);
+router.get('/search', userController.search);
 router.get('/edit/:id', userController.editUser);
 router.get('/rate/:id/:rating', userController.rate);
 router.post('/comment/:id', userController.comment);
+
+// Search
 
 // Messaging
 router.get('/inbox', userController.getInboxPage);
