@@ -9,24 +9,37 @@
 		<% include partials/header %>
 	</header>
 	
-	<!-- Container for search box with grey background-->
+	<!--Enclose search interface with grey background-->
 	<div class="jumbotron text-center">
+		<form class="form-horizontal" action="/users/<%= editUser._id %>" method="post" enctype="multipart/form-data">
+		<input name="method" type="hidden" value="put">
+	
+		<!-- Search box-->
 		<div class="form-group">
-		
-		    <!-- Search box-->
-			<label class="col-sm-2 control-label">Search</label>
-			<div class="col-sm-4">
-				<input name="search" type="text" class="form-control">
+			<label class="col-sm-3 control-label">Search</label>
+			<div class="col-sm-6">
+				<input name="displayName" type="text" class="form-control" value="">
 			</div>
-			
-			<!-- Radio button for all users-->
-			<input name="option" type="radio"> Search All Users
-			</input>
-			
-			<!-- Radio button for all cat walkers-->
-			<input name="option" type="radio" > Search All Cat Walkers
-			</input>
 		</div>
+
+		<!--Search options-->
+		<div class="form-group">
+			<label class="col-sm-3 control-label"></label>
+			<div class="col-sm-6">
+
+				<!-- All users-->
+				<input name="option" type="radio">&nbsp All Users</input>
+				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+			
+				<!-- All Cat-Walkers-->
+				<input name="option" type="radio">&nbsp All Cat-Walkers</input>
+				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				
+				<!-- All Non-Cat-Walkers-->
+				<input name="option" type="radio">&nbsp All Non-Cat-Walkers</input>
+			</div>
+		</div>
+		</form>
 	</div>
 </div>
 </body>
