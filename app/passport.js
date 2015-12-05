@@ -66,15 +66,14 @@ module.exports = function(passport) {
                     }
 
                     var imgPath = __dirname;
-                    imgPath = imgPath.replace("app/api/misc", "views/assets/user_pictures/");
-                    imgPath += 'default.png';
-                    
-                    // set the user's local credentials
-                    newUser.local.email = email;
-                    newUser.picture = imgPath;
-                    newUser.displayName = email;
-                    newUser.description = '';
-                    newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
+                    imgPath = imgPath.replace("app/api/misc", "views/assets/user_pictures/default.png");
+					
+					// set the user's local credentials
+					newUser.local.email = email;
+					newUser.picture = imgPath;
+					newUser.displayName = email;
+					newUser.description = '';
+					newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
                     newUser.cats = [];
                     newUser.comments = [];
                     newUser.messages = [];

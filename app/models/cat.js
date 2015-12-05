@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var catSchema = mongoose.Schema({
     owner : String, // user's id
 	name : String,
-	age : String,
+	age : Number,
 	weight : String,
 	color : String,
 	picture : String,
