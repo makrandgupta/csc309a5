@@ -1,19 +1,18 @@
 'use strict';
 
 var express = require('express');
+var multer = require('multer');
+
 var userController = require('./user.controller');
 var adminController = require('./admin.controller');
 var User = require('../../models/user');
-var multer= require('multer');
 
 var router = express.Router();
 
-
-
 // router middleware to check if the user is an admin
 function isAdmin(req, res, next){
-    if(req.user.local.accountType === 'admin' || req.user.local.accountType === 'superAdmin') {
-       return next();
+    if (req.user.local.accountType === 'admin' || req.user.local.accountType === 'superAdmin') {
+        return next();
     }
     res.redirect('/');
 }
@@ -49,6 +48,5 @@ router.get('/admin/edit/:id', isAdmin, adminController.editUser);
 router.get('/delete/:id', isAdmin, adminController.delete);
 router.get('/make-admin/:id', isAdmin, adminController.makeAdmin);
 router.get('/remove-admin/:id', isAdmin, adminController.removeAdmin);
-
 
 module.exports = router;
