@@ -70,7 +70,8 @@ exports.search = function (req, res) {
 * */
 
 exports.searchResults = function (req, res) {
-	res.end();
+	console.log(req.body);
+	res.json({message: "posted"});
 };
 
 /*
@@ -111,7 +112,6 @@ exports.editUser = function (req, res) {
             me: req.user,
             editUser: user
         });
-
     });
 };
 

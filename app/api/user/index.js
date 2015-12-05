@@ -42,7 +42,7 @@ router.get('/:id', userController.singleUser);
 router.post('/:id', upload.single('picture'), userController.update);
 
 
-// Search
+// Search endpoints ----------------------------------------------------------
 router.post('/search', userController.searchResults);
 
 
