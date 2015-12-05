@@ -43,6 +43,7 @@ router.post('/comment/:id', userController.comment);
 router.get('/inbox', userController.getInboxPage);
 router.get('/message/:id', userController.getMessagePage);
 router.post('/message/:id', userController.message);
+router.get('/delete/message/:id', userController.deleteMessage);
 
 // These routes appear later so they don't accidentally match
 //   routes that have a single word; i.e. "/inbox", etc.
