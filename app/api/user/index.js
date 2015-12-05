@@ -29,7 +29,7 @@ var upload = multer({
 });
 
 
-//basic user endpoints
+// Basic user endpoints -------------------------------------------------------
 
 router.get('/', userController.allUsers);
 router.get('/me', userController.me);
@@ -41,11 +41,18 @@ router.get('/rate/:id/:rating', userController.rate);
 router.post('/:id', upload.single('picture'), userController.update);
 router.post('/comment/:id', userController.comment);
 
-//admin endpoints
+// Messaging
+router.get('/inbox', userController.getInboxPage);
+router.get('/message/:id', userController.getMessagePage);
+router.post('/message/:id', userController.message);
+
+
+// Admin endpoints ------------------------------------------------------------
 
 router.get('/admin/edit/:id', isAdmin, adminController.editUser);
 router.get('/delete/:id', isAdmin, adminController.delete);
 router.get('/make-admin/:id', isAdmin, adminController.makeAdmin);
 router.get('/remove-admin/:id', isAdmin, adminController.removeAdmin);
+
 
 module.exports = router;

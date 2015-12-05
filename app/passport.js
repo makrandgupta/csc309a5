@@ -77,6 +77,7 @@ module.exports = function(passport) {
 					newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
                     newUser.cats = [];
                     newUser.comments = [];
+                    newUser.messages = [];
 					newUser.rating = 0;
 					newUser.ratings = [];
 					newUser.markModified('ratings');
