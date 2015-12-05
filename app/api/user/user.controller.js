@@ -239,7 +239,7 @@ exports.comment = function(req, res) {
 
 // render the inbox page
 exports.getInboxPage = function(req, res) {
-    Message.find({'_id': { $in: user.messages}}, function(err, messages) {
+    Message.find({'_id': { $in: req.user.messages}}, function(err, messages) {
         if (err) return res.send(err);
 
         res.render('inbox.ejs', {
