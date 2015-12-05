@@ -68,10 +68,14 @@ module.exports = function(passport) {
 						console.log('its empty');
 						newUser.local.accountType = 'superAdmin';
 					}
+
+                    var imgPath = __dirname;
+                    imgPath = imgPath.replace("app/api/misc", "views/assets/user_pictures/");
+                    imgPath += 'default.png';
 					
 					// set the user's local credentials
 					newUser.local.email = email;
-					newUser.picture = '';
+					newUser.picture = imgPath;
 					newUser.displayName = email;
 					newUser.description = '';
 					newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
