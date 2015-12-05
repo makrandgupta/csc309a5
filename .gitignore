@@ -7,22 +7,3 @@
 
 # Vim swap files
 .*.swp
-
-# Misc. -------------------------------
-
-lib-cov
-*.seed
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-
-pids
-logs
-results
-
-config/secretDatabase.js
-config/secretAuth.js
-
