@@ -71,6 +71,7 @@ exports.searchResults = function (req, res) {
     Cat.find(query, function(err, cats) {
 
         res.render('catresult.ejs',{
+            me: req.user,
             cats: cats
         });
     });

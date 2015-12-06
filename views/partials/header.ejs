@@ -29,7 +29,10 @@
                 Hello <%= me.displayName %>!
             </a></li>
             <li><a href="/messages/inbox">
-                <span class="glyphicon glyphicon-envelope"></span>
+            	<% if(me.hasNewMessage) {
+            		var style = "color: red;";
+            	}%>
+                <span class="glyphicon glyphicon-envelope" style="<%=style%>""></span>
                 Inbox
             </a></li>
             <li><a href="/users/me/edit">
