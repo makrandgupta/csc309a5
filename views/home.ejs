@@ -8,6 +8,11 @@
 	<header>
 		<% include partials/header %>
 	</header>
+	<h1>
+		<%if(typeof message !== 'undefined'){%>
+			<%= message%>
+		<%}%>
+	</h1>
 	<%
 		var adminControls = false;
 		var adminMessage = '';
@@ -24,7 +29,7 @@
 		}
 	%>
 	<%
-		if(adminControls === true){
+		if(typeof message == 'undefined' && adminControls === true){
 			%><h1>Welcome <%= adminMessage%></h1><%
 		}
 	%>
@@ -48,9 +53,9 @@
 					<td><a href="/users/<%= user._id%>"><%= user.displayName %></a></td>
 					<td><%= user.local.email %></td>
 					<td><%if(user.isCatWalker === true){%>
-					    yes
+							yes
 					    <%}else{%>
-					    no
+							no
 					    <%}%>
 					</td>
 					<%if(adminControls === true){%>

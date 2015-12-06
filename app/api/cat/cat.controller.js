@@ -76,7 +76,8 @@ exports.searchResults = function (req, res) {
     Cat.find(query, function(err, cats) {
         res.render('catresult.ejs',{
             me: req.user,
-            cats: cats
+            cats: cats,
+            message : 'Search Results for Cats'
         });
     });
 };
@@ -91,7 +92,7 @@ exports.newCat = function(req, res) {
         var cat = new Cat();
         cat.owner = user._id;
 	    cat.name = '';
-	    cat.age = 0;
+	    cat.age = '';
 	    cat.weight = '';
 	    cat.color = '';
 	    cat.breed = '';

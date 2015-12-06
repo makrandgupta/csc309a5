@@ -8,6 +8,11 @@
 	<header>
 		<% include partials/header %>
 	</header>
+	<h1>
+		<%if(typeof message !== 'undefined'){%>
+			<%= message%>
+		<%}%>
+	</h1>
 	<div class="jumbotron text-center">
 		<% cats.forEach(function(cat) {%>
 			<div class="row col-md-2 col-md-offset-1">

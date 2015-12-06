@@ -93,7 +93,7 @@ exports.searchResults = function (req, res) {
 		res.render('home.ejs', {
             users : results,
             me : req.user,
-            message : 'Search Results'
+            message : 'Search Results for Users'
         });
 	});
 };
