@@ -80,7 +80,6 @@ exports.searchResults = function (req, res) {
 	if (type != 'all') {
 		query['isCatWalker'] = userTypeHasher[type];
 	}
-	console.log(req.body);
 
 	User.find(query, function(err, results) {
 		if (err) {
@@ -93,8 +92,6 @@ exports.searchResults = function (req, res) {
             message : 'Search Results'
         });
 	});
-	
-	
 };
 
 /*
