@@ -85,11 +85,12 @@ exports.searchResults = function (req, res) {
 		query['rating'] = {$gte: Number(req.body.minrating), $lte: Number(req.body.maxrating)};
 	}
 
-	User.find(query, function(err, results) {
+	User.find(query).lean().exec(function(err, results) {
 		if (err) {
 			return res.send(err);
 		}
 		
+		results = computeUserRecommendations(req.user, results);
 		res.render('home.ejs', {
             users : results,
             me : req.user,
@@ -264,4 +265,44 @@ exports.comment = function(req, res) {
             });
         });
     });
+}
+
+/*
+* Calculate the rIndex between each user in 'otherUsers' to 'user' and
+* return 'otherUsers' as sorted list by their rIndex in non-decreasing
+* order.  The lower a rIndex between two users, the more likely they
+* are to be recommended to each other.  An rIndex is always nonnegative.
+* */
+
+function computeUserRecommendations(user, otherUsers) {
+	var i = 0;
+
+	while (i <= otherUsers.length - 1) {
+		if (user['_id'].equals(otherUsers[i]['_id'])) {
+			otherUsers.splice(i, 1);
+			continue;
+		}
+
+		// Compare their number of cats
+		var rIndex = Math.abs(
+				otherUsers[i]['cats'].length - user['cats'].length);
+
+		// Compare their cat walker status
+		if (otherUsers[i]['isCatWalker'] !== user['isCatWalker']) {
+			rIndex = max(rIndex - 1, 0);
+		}
+
+		otherUsers[i]['rIndex'] = rIndex;
+		i = i + 1;
+	}
+
+	otherUsers.sort(compareUsers);
+	return otherUsers;
+}
+
+/*
+* Compare 'userA' and 'userB' by their the rIndices.
+* */
+function compareUsers(userA, userB) {
+  return userA['rIndex'] - userB['rIndex'];
 }
