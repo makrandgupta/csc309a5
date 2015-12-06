@@ -185,11 +185,8 @@ module.exports = function(passport) {
 };
 
 function setUserDefaults(newUser, displayName) {
-    var imgPath = __dirname;
-    imgPath = imgPath.replace("app/api/misc", "views/assets/user_pictures/default.png");
-
     // set the user's local credentials
-    newUser.picture = imgPath;
+    newUser.picture = "/views/assets/default.png";
     newUser.displayName = displayName;
     newUser.description = '';
     newUser.cats = [];
