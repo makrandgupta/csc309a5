@@ -65,12 +65,36 @@ exports.search = function (req, res) {
 };
 
 /*
-* Search results.
+* Search user results.
 * */
 
 exports.searchResults = function (req, res) {
+	var displayName = req.body['displayName'];
+	var type = req.body['type'];
+	var userTypeHasher = {
+			walkers: true,
+			nonwalkers: false
+	}
+	var query = {'displayName' : { $regex: displayName, $options: 'i' }};
+	
+	if (type != 'all') {
+		query['isCatWalker'] = userTypeHasher[type];
+	}
 	console.log(req.body);
-	res.redirect('/');
+
+	User.find(query, function(err, results) {
+		if (err) {
+			return res.send(err);
+		}
+		
+		res.render('home.ejs', {
+            users : results,
+            me : req.user,
+            message : 'Search Results'
+        });
+	});
+	
+	
 };
 
 /*

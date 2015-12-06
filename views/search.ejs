@@ -49,9 +49,15 @@
 			<!-- Rating options -->
 			<div class="form-group">
 				<label class="col-sm-3 control-label">Rating</label>
-				<div class="col-sm-3">
+				
+				<!-- Include rating>
+				<div class="col-sm-2">
+					<input name="walker" type="checkbox" value="off"> Include ratings</input>
+				</div>
+				
+				<div class="col-sm-2">
 
-					<!-- minimum rating-->
+					<!-- Minimum rating-->
 					Minimum: 
 					<select name="minrating">
 						<% for (i = 1; i <=5; i++) {%>
@@ -59,7 +65,7 @@
 						<%}%>
 					</select>
 				</div>
-				<div class="col-sm-3">
+				<div class="col-sm-2">
 
 					Maximum: 
 					<!-- maximum rating-->
