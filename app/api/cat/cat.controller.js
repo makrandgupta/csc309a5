@@ -63,13 +63,17 @@ exports.search = function(req, res) {
 * Search results
 * */
 exports.searchResults = function (req, res) {
-    var query = {"name": {$regex: req.body.name, $options: "i"},
-        "age": {$gte: Number(req.body.minage), $lte: Number(req.body.maxage)}};
+    var query = {"name": {$regex: req.body.name, $options: "i"}};
+    
     if (req.body.walker && req.body.walker == 'needsWalker') {
         query.needsWalker = true;
     }
+    
+    if (req.body.includeage) {
+		query['age'] = {$gte: Number(req.body.minage), $lte: Number(req.body.maxage)};
+	}
+	
     Cat.find(query, function(err, cats) {
-
         res.render('catresult.ejs',{
             me: req.user,
             cats: cats

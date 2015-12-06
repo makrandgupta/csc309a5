@@ -22,7 +22,7 @@
 			
 				<!--Search input-->
 				<div class="col-sm-6">
-					<input name="name" type="text" class="form-control" placeholder="Name">
+					<input name="name" type="text" class="form-control" placeholder="Cat Name" required>
 				</div>
 			</div>
 
@@ -32,7 +32,7 @@
 				<div class="col-sm-6">
 
 					<!-- All cats-->
-					<input name="walker" type="radio" value="all">&nbsp All cats</input>
+					<input name="walker" type="radio" value="all" required>&nbsp All cats</input>
 					&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 			
 					<!-- Cats that need walkers-->
@@ -42,7 +42,12 @@
 
 			<div class="form-group">
 				<label class="col-sm-3 control-label">Age</label>
-				<div class="col-sm-3">
+				<div class="col-sm-2">
+					
+					<!-- Include age-->
+					<input name="includeage" type="checkbox" "Checked"> Include age</input>
+				</div>
+				<div class="col-sm-2">
 
 					<!-- minimum age-->
 					Minimum: 
@@ -54,10 +59,10 @@
 						<option value="15">15 or older</option>
 					</select>
 				</div>
-				<div class="col-sm-3">
+				<div class="col-sm-2">
 
-					Maximum: 
 					<!-- maximum age-->
+					Maximum: 
 					<select name="maxage">
 						<option value="0">Less than 1</option>
 						<% for (i = 1; i < 15; i++) {%>

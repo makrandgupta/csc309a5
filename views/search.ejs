@@ -24,7 +24,7 @@
 			
 				<!--Search input-->
 				<div class="col-sm-6">
-					<input name="displayName" type="text" class="form-control" value="">
+					<input name="displayName" type="text" class="form-control" value="" placeholder="Display name" required>
 				</div>
 			</div>
 
@@ -34,7 +34,7 @@
 				<div class="col-sm-6">
 
 					<!-- All users-->
-					<input name="type" type="radio" value="all">&nbsp All Users</input>
+					<input name="type" type="radio" value="all" required>&nbsp All Users</input>
 					&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 			
 					<!-- All Cat-Walkers-->
@@ -54,8 +54,7 @@
 					
 					<!-- Include rating-->
 					<input name="includeratings" type="checkbox" "Checked"> Include ratings</input>
-				</div>
-				
+				</div>				
 				<div class="col-sm-2">
 
 					<!-- Minimum rating-->
@@ -68,8 +67,8 @@
 				</div>
 				<div class="col-sm-2">
 
-					Maximum: 
 					<!-- maximum rating-->
+					Maximum: 
 					<select name="maxrating">
 						<% for (i = 1; i <=5; i++) {%>
 							<option value="<%=i%>"><%=i%></option>
