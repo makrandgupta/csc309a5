@@ -151,13 +151,12 @@ module.exports = function(passport) {
                 // if there is no user found with that facebook id, create them
                 var newUser = new User();
 
+                console.log(profile); // TEST DEBUG
+
                 // set all of the facebook information in our user model
                 newUser.facebook.id = profile.id; // set the users facebook id                   
                 newUser.facebook.token = token; // we will save the token that facebook provides to the user                    
                 newUser.facebook.name = profile.displayName; // look at the passport user profile to see how names are returned
-                newUser.facebook.email = profile.email;
-
-                var newUser = new User();
 
                 User.find(function(err, users) {
                     if (err) return done(err);
