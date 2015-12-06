@@ -102,7 +102,7 @@
 		similarUsers.forEach(function(similarUser) {%>
 			<div class="row col-md-2 col-md-offset-1">
 				<img src="<%= similarUser.picture%>" class="img-responsive" style="max-height:200px;"><br>
-				<strong><%=similarUser.displayName%></strong><br>
+				<a href="/users/<%=similarUser._id%>"><strong><%=similarUser.displayName%></strong></a><br>
 				Email: <%=similarUser.local.email%><br>
 				Cat walker: <%if(similarUser.isCatWalker === true){%>
 								yes
