@@ -270,11 +270,14 @@ exports.comment = function(req, res) {
 /*
 * Calculate the rIndex between each user in 'otherUsers' to 'user' and
 * return 'otherUsers' as sorted list by their rIndex in non-decreasing
-* order.  The lower a rIndex between two users, the more likely they
+* order.
+* 
+* The lower a rIndex between two users, the more likely they
 * are to be recommended to each other.  An rIndex is always nonnegative.
 * */
 
 function computeUserRecommendations(user, otherUsers) {
+	var START_INDEX = 10;
 	var i = 0;
 
 	while (i <= otherUsers.length - 1) {
@@ -283,13 +286,14 @@ function computeUserRecommendations(user, otherUsers) {
 			continue;
 		}
 
+		var rIndex = START_INDEX;
+
 		// Compare their number of cats
-		var rIndex = Math.abs(
-				otherUsers[i]['cats'].length - user['cats'].length);
+		rIndex = rIndex + Math.abs(otherUsers[i]['cats'].length - user['cats'].length);
 
 		// Compare their cat walker status
 		if (otherUsers[i]['isCatWalker'] !== user['isCatWalker']) {
-			rIndex = max(rIndex - 1, 0);
+			rIndex = Math.max(rIndex - START_INDEX, 0);
 		}
 
 		otherUsers[i]['rIndex'] = rIndex;
