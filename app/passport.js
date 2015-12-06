@@ -191,6 +191,7 @@ function setUserDefaults(newUser, displayName) {
     newUser.cats = [];
     newUser.comments = [];
     newUser.messages = [];
+    newUser.hasNewMessage = false;
     newUser.rating = 0;
     newUser.ratings = [];
     newUser.markModified('ratings');

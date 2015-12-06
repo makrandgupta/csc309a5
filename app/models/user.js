@@ -23,6 +23,7 @@ var userSchema = mongoose.Schema({
     cats : [String], // array of ids
     comments : [String], // array of ids
     messages : [String], // array of ids
+    hasNewMessage: Boolean,
     phone : String,
     rating : Number,  // Average rating
     ratings : [{user: String, rating: Number}],  // Existing ratings associated w/ id, so we can change them

@@ -8,10 +8,16 @@ exports.getInboxPage = function(req, res) {
     Message.find({'_id': { $in: req.user.messages}}, function(err, messages) {
         if (err) return res.send(err);
 
-        res.render('inbox.ejs', {
-            me: req.user,
-            messages: messages,
+        User.findById(req.user._id, function(err, user) {
+            user.hasNewMessage = false;
+            user.save(function(err) {
+                res.render('inbox.ejs', {
+                    me: req.user,
+                    messages: messages,
+                });
+            });
         });
+        
     });
 }
 
@@ -46,6 +52,7 @@ exports.message = function(req, res) {
         message.save(function(err) {
             if (err) return res.send(err);
 
+            user.hasNewMessage = true;
             user.messages.push(message._id);
             user.markModified('messages');
             user.save(function(err) {
