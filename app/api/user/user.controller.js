@@ -293,7 +293,7 @@ function computeUserRecommendations(user, otherUsers) {
 
 		// Compare their cat walker status
 		if (otherUsers[i]['isCatWalker'] !== user['isCatWalker']) {
-			rIndex = Math.max(rIndex - START_INDEX, 0);
+			rIndex = rIndex - START_INDEX;
 		}
 
 		otherUsers[i]['rIndex'] = rIndex;
