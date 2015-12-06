@@ -3,7 +3,7 @@
 var User = require('../../models/user.js');
 var Cat = require('../../models/cat.js');
 var Comment = require('../../models/comment.js');
-var Recommendation = require('../../misc/recommendation.js');
+var Recommendation = require('../misc/recommendation.js');
 
 var fs = require('fs');
 
@@ -32,7 +32,7 @@ exports.me = function (req, res) {
 
         Comment.find({'_id': { $in: req.user.comments}}, function(err, comments) {
             if(err) return res.send(err);
-        	    
+
         	res.render('profile.ejs', {
         	    me : req.user, // get the user out of session and pass to template
                 viewUser : req.user,
@@ -111,16 +111,39 @@ exports.singleUser = function (req, res) {
 		Cat.find({'_id': { $in: user.cats}}, function(err, cats) {
 			if(err) return res.send(err);
 
-            Comment.find({'_id': { $in: user.comments}}, function(err, comments) {
-                if(err) return res.send(err);
-    	    
-    			res.render('profile.ejs', {
-        			viewUser: user,
-        			me : req.user,
+			User.find({}).lean().exec(function(err, results) {
+				if (err) return res.send(err);
+		
+				results = Recommendation.computeUserRecommendations(user, results);
+				var similarUsers = [];
+				var i = 0;
+				console.log(user);
 
-        			cats: cats,
-                    comments: comments,
-    			});
+				// Up to 4 users with rIndices < 10 are listed as similar on a profile.
+				while (i <= results.length - 1) {
+					var otherUser = results[i];
+					console.log(otherUser);
+
+					if (similarUsers.length <= 3 && otherUser['rIndex'] < 10) {
+						similarUsers.push(otherUser);
+						i = i + 1;
+					}
+					else {
+						i = results.length;
+					}
+				}
+
+				Comment.find({'_id': { $in: user.comments}}, function(err, comments) {
+					if(err) return res.send(err);
+    	    
+					res.render('profile.ejs', {
+						viewUser: user,
+						me : req.user,
+						cats: cats,
+						similarUsers: similarUsers,
+						comments: comments
+					});
+				});
             });
         });
     });

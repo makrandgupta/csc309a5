@@ -20,13 +20,21 @@ function computeUserRecommendations(user, otherUsers) {
 		}
 
 		var rIndex = START_INDEX;
-
+		
 		// Compare their number of cats
-		rIndex = rIndex + Math.abs(otherUsers[i]['cats'].length - user['cats'].length);
+		var numUserCats = user['cats'].length;
+		var numOtherUserCats = otherUsers[i]['cats'].length;
+		var minNumCats = Math.min(numUserCats, numOtherUserCats);
+		rIndex = rIndex +
+				Math.abs(numOtherUserCats - numUserCats) -
+				Math.max(minNumCats * minNumCats, 0) / 10;
 
 		// Compare their cat walker status
-		if (otherUsers[i]['isCatWalker'] !== user['isCatWalker']) {
-			rIndex = rIndex - START_INDEX;
+		if (otherUsers[i]['isCatWalker'] === user['isCatWalker']) {
+			rIndex = Math.max(rIndex - 2, 0);
+		}
+		else {
+			rIndex = rIndex + 2;
 		}
 
 		otherUsers[i]['rIndex'] = rIndex;
