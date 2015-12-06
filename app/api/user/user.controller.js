@@ -333,4 +333,3 @@ exports.listS3Branches = function (req, res){
 		}
 	});
 };
-};
