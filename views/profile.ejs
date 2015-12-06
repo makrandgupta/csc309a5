@@ -88,13 +88,14 @@
 		<%});
 		}%>
 	</div>
-	
 	<div class="row">
 	    <%if(String(me._id) == String(viewUser._id)){%>
 		<a href="/cats/new/<%= viewUser._id%>">New cat</a>
 	    <%}%>
 	</div>
-	
+	<div class="page-header text-center">
+		<h1>Users similar to <%= viewUser.displayName%></h1>
+	</div>		
 	<div class="page-header">
 	    <h3><span class="glyphicon glyphicon-comment"></span> Comments for <%= viewUser.displayName%></h3>
 	</div>
