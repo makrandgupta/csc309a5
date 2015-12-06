@@ -80,6 +80,10 @@ exports.searchResults = function (req, res) {
 	if (type != 'all') {
 		query['isCatWalker'] = userTypeHasher[type];
 	}
+	
+	if (req.body.includeratings) {
+		query['rating'] = {$gte: Number(req.body.minrating), $lte: Number(req.body.maxrating)};
+	}
 
 	User.find(query, function(err, results) {
 		if (err) {
