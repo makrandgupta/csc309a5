@@ -1,0 +1,7 @@
+# This file exists to make sure this directory is included in each commit,
+#   but local image files are ignored in the commit.
+
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore
