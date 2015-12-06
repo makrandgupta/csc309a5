@@ -61,15 +61,11 @@ module.exports = function(passport) {
                 var newUser = new User();
                 User.find(function(err, users) {
                     if (err) return done(err);
-
-                    console.log('passport: ' + users);
                     
                     if (typeof users !== 'undefined' && users.length > 0) {
                         // the array is defined and has at least one element
-                        console.log('there is something');
                         newUser.accountType = 'user';
                     } else {
-                        console.log('its empty');
                         newUser.accountType = 'superAdmin';
                     }
 					
@@ -84,8 +80,6 @@ module.exports = function(passport) {
                     // save the user
                     newUser.save(function(err) {
                         if (err) return done(err);
-
-                        console.log(newUser);
 
                         return done(null, newUser);
                     });
@@ -157,23 +151,33 @@ module.exports = function(passport) {
                 // if there is no user found with that facebook id, create them
                 var newUser = new User();
 
-                console.log(profile); // TODO DEBUG
-
                 // set all of the facebook information in our user model
                 newUser.facebook.id = profile.id; // set the users facebook id                   
                 newUser.facebook.token = token; // we will save the token that facebook provides to the user                    
                 newUser.facebook.name = profile.displayName; // look at the passport user profile to see how names are returned
                 newUser.facebook.email = profile.email;
 
-                // set defaults
-                setUserDefaults(newUser, newUser.facebook.name);
+                var newUser = new User();
 
-                // save our user to the database
-                newUser.save(function(err) {
+                User.find(function(err, users) {
                     if (err) return done(err);
+                    
+                    if (typeof users !== 'undefined' && users.length > 0) {
+                        newUser.accountType = 'user';
+                    } else {
+                        newUser.accountType = 'superAdmin';
+                    }
 
-                    // if successful, return the new user
-                    return done(null, newUser);
+                    // set defaults
+                    setUserDefaults(newUser, newUser.facebook.name);
+
+                    // save our user to the database
+                    newUser.save(function(err) {
+                        if (err) return done(err);
+
+                        // if successful, return the new user
+                        return done(null, newUser);
+                    });
                 });
             });
         });
@@ -181,11 +185,8 @@ module.exports = function(passport) {
 };
 
 function setUserDefaults(newUser, displayName) {
-    var imgPath = __dirname;
-    imgPath = imgPath.replace("app/api/misc", "views/assets/user_pictures/default.png");
-
     // set the user's local credentials
-    newUser.picture = imgPath;
+    newUser.picture = "/views/assets/default.png";
     newUser.displayName = displayName;
     newUser.description = '';
     newUser.cats = [];
