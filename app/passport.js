@@ -185,7 +185,7 @@ module.exports = function(passport) {
 
 function setUserDefaults(newUser, displayName) {
     // set the user's local credentials
-    newUser.picture = "'https://csc309a5.s3.amazonaws.com/default_user.png'";
+    newUser.picture = 'https://csc309a5.s3.amazonaws.com/default_user.png';
     newUser.displayName = displayName;
     newUser.description = '';
     newUser.cats = [];
