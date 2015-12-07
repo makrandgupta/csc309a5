@@ -91,7 +91,7 @@ exports.searchResults = function (req, res) {
 			return res.send(err);
 		}
 		
-		results = Recommendation.computeUserRecommendations(req.user, results);
+		Recommendation.computeUserRecommendations(req.user, results);
 		res.render('home.ejs', {
             users : results,
             me : req.user,

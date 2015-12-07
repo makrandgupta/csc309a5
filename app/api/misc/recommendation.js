@@ -2,8 +2,8 @@
 
 /*
 * Calculate the rIndex between each user in 'otherUsers' to 'user' and
-* return 'otherUsers' as sorted list by their rIndex in non-decreasing
-* order.
+* mutate 'otherUsers' into a sorted list by their rIndex in
+* non-decreasing order.
 * 
 * The lower a rIndex between two users, the more likely they
 * are to be recommended to each other.  An rIndex is always nonnegative.
@@ -31,10 +31,10 @@ function computeUserRecommendations(user, otherUsers) {
 
 		// Compare their cat walker status
 		if (otherUsers[i]['isCatWalker'] === user['isCatWalker']) {
-			rIndex = Math.max(rIndex - 2, 0);
+			rIndex = Math.max(rIndex - 1, 0);
 		}
 		else {
-			rIndex = rIndex + 2;
+			rIndex = rIndex + 1;
 		}
 
 		otherUsers[i]['rIndex'] = rIndex;
@@ -42,7 +42,6 @@ function computeUserRecommendations(user, otherUsers) {
 	}
 
 	otherUsers.sort(compareUsers);
-	return otherUsers;
 }
 
 /*
