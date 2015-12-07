@@ -114,11 +114,10 @@ exports.singleUser = function (req, res) {
 			User.find({}).lean().exec(function(err, results) {
 				if (err) return res.send(err);
 		
-				results = Recommendation.computeUserRecommendations(user, results);
+				Recommendation.computeUserRecommendations(user, results);
 				var similarUsers = [];
 				var i = 0;
-				console.log(user);
-
+				
 				// Up to 4 users with rIndices < 10 are listed as similar on a profile.
 				while (i <= results.length - 1) {
 					var otherUser = results[i];
