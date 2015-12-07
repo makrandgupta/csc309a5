@@ -12,7 +12,7 @@ exports.getInboxPage = function(req, res) {
             user.hasNewMessage = false;
             user.save(function(err) {
                 res.render('inbox.ejs', {
-                    me: req.user,
+                    me: user,
                     messages: messages,
                 });
             });
