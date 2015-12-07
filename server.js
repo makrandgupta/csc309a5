@@ -45,5 +45,5 @@ app.use(express.static(__dirname + '/'));
 require('./app/routes.js')(app, passport);
 
 // Launch the app.
-app.listen(3000);
-console.log('The magic happens on port ' + 3000);
+app.listen(process.env.PORT || 3000);
+console.log('The magic happens on port ' + process.env.PORT || 3000);
