@@ -128,43 +128,45 @@ exports.update = function(req, res) {
             //update the user info if new
             if(req.body.displayName) user.displayName = req.body.displayName;
             if(req.body.description) user.description = req.body.description;
-	    if(req.body.phone) user.phone = req.body.phone;
+            if(req.body.phone) user.phone = req.body.phone;
             if(req.body.password) user.local.password = user.generateHash(req.body.password);
-	    if(req.body.walker)
-		user.isCatWalker = true;
-	    else
-		user.isCatWalker = false;
+            if(req.body.walker)
+                user.isCatWalker = true;
+            else
+        	user.isCatWalker = false;
+            if(user.picture !== '')
+                user.picture = req.body.profile_picture;
 	    
 
-            if(req.file){
-                if(req.file.mimetype === 'image/jpeg' || req.file.mimetype === 'image/bmp' || req.file.mimetype === 'image/png'){
-                    finalPath = req.file.path;
-                    switch (req.file.mimetype){
-                        case 'image/jpeg':
-                            finalPath += '.jpg';
-                            break;
-                        case 'image/bmp':
-                            finalPath += '.bmp';
-                            break;
-                        case 'image/png':
-                            finalPath += '.png';
-                            break;
-						default:
-							finalPath = finalPath;
-                    }
+      //       if(req.file){
+      //           if(req.file.mimetype === 'image/jpeg' || req.file.mimetype === 'image/bmp' || req.file.mimetype === 'image/png'){
+      //               finalPath = req.file.path;
+      //               switch (req.file.mimetype){
+      //                   case 'image/jpeg':
+      //                       finalPath += '.jpg';
+      //                       break;
+      //                   case 'image/bmp':
+      //                       finalPath += '.bmp';
+      //                       break;
+      //                   case 'image/png':
+      //                       finalPath += '.png';
+      //                       break;
+						// default:
+						// 	finalPath = finalPath;
+      //               }
 
-                    fs.rename(req.file.path, finalPath, function(err) {
-                        if (err) console.log('ERROR: ' + err);
+      //               fs.rename(req.file.path, finalPath, function(err) {
+      //                   if (err) console.log('ERROR: ' + err);
 
-                        user.picture = finalPath;
-                        console.log('maybe:'+ user.path);
-                    });
-                }
+      //                   user.picture = finalPath;
+      //                   console.log('maybe:'+ user.path);
+      //               });
+      //           }
 
-                finalPath = finalPath.replace(req.file.destination, '/misc/img');
-                user.picture = finalPath;
-                console.log('dbpath: ' + user.picture);
-            }
+      //           finalPath = finalPath.replace(req.file.destination, '/misc/img');
+      //           user.picture = finalPath;
+      //           console.log('dbpath: ' + user.picture);
+      //       }
             //save the user
             user.save(function(err) {
                 if(err) res.send(err);

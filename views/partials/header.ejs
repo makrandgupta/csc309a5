@@ -14,7 +14,7 @@
 		<%}%>	
 		<ul class="nav navbar-nav navbar-right">
 		<% if(typeof me !== "undefined"){%>
-			<li><img src="<%= me.local.picture%>" class="img-responsive img-circle" style="max-height:40px; padding-top:10px;"></li>
+			<li><img src="<%= me.picture%>" class="img-responsive img-circle" style="max-height:40px; padding-top:10px;"></li>
 			<li><a href="/users/me">Hello
 			<% if(typeof me.local.displayName !== "undefined" || me.local.displayName !== ''){%> 
 				<%=me.local.displayName%>

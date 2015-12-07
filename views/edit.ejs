@@ -16,82 +16,84 @@
 		%>
 	</header>
 	<form class="form-horizontal" action="/users/<%= editUser._id %>" method="post" enctype="multipart/form-data">
-	<input name="method" type="hidden" value="put">
-	
-	
+		<input name="method" type="hidden" value="put">
+		<input id="userId" name="userId" type="hidden" value="<%=editUser._id%>">
+		<input type="hidden" id="profile_picture" name="profile_picture" value="https://csc309a5.s3.amazonaws.com/default_user.png" />
+		
+		
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label">Picture</label>
-		<div class="col-sm-6">
-			<img src="<%= editUser.picture %>" class="img-responsive" style="max-height:200px;">
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Picture</label>
+			<div class="col-sm-6">
+				<img id="preview" src="<%= editUser.picture %>" class="img-responsive" style="max-height:200px;">
+			</div>
 		</div>
-	</div>
-	
-	<div class="form-group">
-		<label class="col-sm-2 control-label">id</label>
-		<div class="col-sm-6">
-			<input type="text" class="form-control" disabled value="<%= editUser._id %>">
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">id</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" disabled value="<%= editUser._id %>">
+			</div>
 		</div>
-	</div>
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label">Email</label>
-		<div class="col-sm-6">
-			<input name="email" type="text" disabled class="form-control" value="<%= editUser.local.email %>">
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Email</label>
+			<div class="col-sm-6">
+				<input name="email" type="text" disabled class="form-control" value="<%= editUser.local.email %>">
+			</div>
 		</div>
-	</div>
-	<%if(displayPassword === true){%>
-	<div class="form-group">
-		<label class="col-sm-2 control-label">Change Password</label>
-		<div class="col-sm-6">
-			<input name="password" type="password" class="form-control">
+		<%if(displayPassword === true){%>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Change Password</label>
+			<div class="col-sm-6">
+				<input name="password" type="password" class="form-control">
+			</div>
 		</div>
-	</div>
-	<%}%>
+		<%}%>
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label">Display Name</label>
-		<div class="col-sm-6">
-			<input name="displayName" type="text" class="form-control" value="<%= editUser.displayName %>">
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Display Name</label>
+			<div class="col-sm-6">
+				<input name="displayName" type="text" class="form-control" value="<%= editUser.displayName %>">
+			</div>
 		</div>
-	</div>
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label">Description</label>
-		<div class="col-sm-6">
-			<input name="description" type="text" class="form-control" value="<%= editUser.description %>">
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Description</label>
+			<div class="col-sm-6">
+				<input name="description" type="text" class="form-control" value="<%= editUser.description %>">
+			</div>
 		</div>
-	</div>
-	
-	<div class="form-group">
-		<label class="col-sm-2 control-label">Phone number</label>
-		<div class="col-sm-6">
-			<input name="phone" type="text" class="form-control" value="<%= editUser.phone %>">
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Phone number</label>
+			<div class="col-sm-6">
+				<input name="phone" type="text" class="form-control" value="<%= editUser.phone %>">
+			</div>
 		</div>
-	</div>
-	
-	<div class="form-group">
-		<label class="col-sm-2 control-label">Walker Status</label>
-		<div class="col-sm-6">
-			<input name="walker" type="checkbox" <%=editUser.isCatWalker? "Checked" : ""%>> I want to be listed as a cat walker
-			</input>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Walker Status</label>
+			<div class="col-sm-6">
+				<input name="walker" type="checkbox" <%=editUser.isCatWalker? "Checked" : ""%>> I want to be listed as a cat walker
+				</input>
+			</div>
 		</div>
-	</div>
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label">New Picture</label>
-		<div class="col-sm-6">
-			<input name="picture" type="file" class="form-control">
+		<div class="form-group">
+			<label class="col-sm-2 control-label">New Picture</label>
+			<div class="col-sm-6">
+				<input id="picture" name="picture" type="file" class="form-control">
+			</div>
 		</div>
-	</div>
-	
-	
-	
-	<div class="form-group">
-	<div class="col-sm-offset-2 col-sm-6">
-		<button type="submit" class="btn btn-default btn-lg btn-block">Update User</button>
-	</div>
-	</div>
+		
+		
+		
+		<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-6">
+			<button id="submit" type="submit" class="btn btn-default btn-lg btn-block">Update User</button>
+		</div>
+		</div>
 
 	</form>
 	
@@ -108,7 +110,8 @@ function upload_file(file, signed_request, url){
     xhr.onload = function() {
         if (xhr.status === 200) {
             document.getElementById("preview").src = url;            
-            document.getElementById("avatar_url").value = url;
+            document.getElementById("profile_picture").value = url;
+            document.getElementById("submit").disabled = false;
         }
     };
     xhr.onerror = function() {
@@ -123,7 +126,9 @@ function upload_file(file, signed_request, url){
 */
 function get_signed_request(file){
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "/sign_s3?file_name="+file.name+"&file_type="+file.type);
+    console.log(document.getElementById("userId").value+'.'+file.name.split('.').pop());
+
+    xhr.open("GET", "/misc/sign_s3?file_name="+document.getElementById("userId").value+'.'+file.name.split('.').pop()+"&file_type="+file.type);
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4){
             if(xhr.status === 200){
@@ -142,7 +147,8 @@ function get_signed_request(file){
    start upload procedure by asking for a signed request from the app.
 */
 function init_upload(){
-    console.log("here");
+    console.log("upload initiated");
+    document.getElementById("submit").disabled=true;
     var files = document.getElementById("picture").files;
     var file = files[0];
     if(file == null){
@@ -156,6 +162,7 @@ function init_upload(){
 */
 (function() {
     document.getElementById("picture").onchange = init_upload;
+    console.log('listeners bound');
 })();
 </script>
 </body>
