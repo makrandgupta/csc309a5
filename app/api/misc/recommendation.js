@@ -45,7 +45,7 @@ function computeUserRecommendations(user, otherUsers) {
 }
 
 /*
-* Compare 'userA' and 'userB' by their the rIndices.
+* Compare 'userA' and 'userB' by their rIndices.
 * */
 function compareUsers(userA, userB) {
   return userA['rIndex'] - userB['rIndex'];
