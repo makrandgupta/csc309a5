@@ -10,7 +10,7 @@ var FacebookStrategy = passportFacebook.Strategy;
 var facebookAuth = {
     'clientID' : '846443832143866',
     'clientSecret' : '2f922ce98013e2988fb95bccc60d5c77',
-    'callbackURL' : 'http://localhost:3000/auth/facebook/callback'
+    'callbackURL' : 'http://a5-309.herokuapp.com/auth/facebook/callback'
 };
 
 // expose this function to our app using module.exports
