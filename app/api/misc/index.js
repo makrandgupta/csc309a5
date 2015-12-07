@@ -5,6 +5,6 @@ var miscController = require('./misc.controller');
 
 var router = express.Router();
 
-router.get('/img/:file', miscController.image);
+router.get('/sign_s3', miscController.sign_s3);
 
 module.exports = router;
