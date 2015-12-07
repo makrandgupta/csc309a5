@@ -15,9 +15,17 @@ exports.allUsers = function (req, res) {
     User.find(function(err, users) {
         if(err) res.send(err);
         // return the users list
+        var message = '';
+        if(req.user.local.email === ''){
+            message = 'Please add an email address to your profile';
+            console.log('messaged');
+        } else {
+            console.log('not messaged' + req.user.local);
+        }
         res.render('home.ejs', {
             users : users,
-            me : req.user
+            me : req.user,
+            message: message
         });
     });
 };
