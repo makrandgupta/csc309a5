@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include partials/head %>
+</head>
+<body>
+<div class="container">
+	<header>
+		<% include partials/header %>
+	</header>
+	<h1>
+		<%if(typeof message !== 'undefined'){%>
+			<%= message%>
+		<%}%>
+	</h1>
+	<div class="jumbotron text-center">
+		<% cats.forEach(function(cat) {%>
+			<div class="row col-md-2 col-md-offset-1">
+				<img src="<%= cat.picture%>" class="img-responsive" style="max-height:200px;"><br>
+				<strong><%if (cat.name != '') {%>
+					<%=cat.name%>
+				<%} else{%>
+					Unnamed cat
+				<%}%></strong><br>
+				Age: <%= cat.age%><br>
+				Weight: <%= cat.weight%><br>
+				Color: <%= cat.color%><br>
+				Breed: <%= cat.breed%><br>
+				<a href="/users/<%=cat.owner%>">Owner's page</a>
+			</div>
+		<%});%>
+	</div>
+</div>
+</body>
+</html>

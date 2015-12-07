@@ -1,6 +1,7 @@
 'use strict';
 
 var express = require('express');
+
 var messageController = require('./message.controller');
 
 var router = express.Router();

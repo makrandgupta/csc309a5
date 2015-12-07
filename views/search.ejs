@@ -11,40 +11,69 @@
 	
 	<!--Enclose search interface with grey background-->
 	<div class="jumbotron text-center">
-		<form class="form-horizontal" action="/search%>" method="post" enctype="multipart/form-data">
-			<input name="method" type="hidden" value="put">
+		<form class="form-horizontal" action="/users/search" method="post">
 	
 			<!-- Search box-->
 			<div class="form-group">
-				<div class="col-sm-2">
-				</div>
+				<div class="col-sm-2"></div>
 			
 				<!--Search button-->
 				<div class="col-sm-1">
-					<button class="btn btn-default">Search</button>
+					<button type="submit" class="btn btn-default">Search</button>
 				</div>
 			
 				<!--Search input-->
 				<div class="col-sm-6">
-					<input name="displayName" type="text" class="form-control" value="">
+					<input name="displayName" type="text" class="form-control" value="" placeholder="Display name" required>
 				</div>
 			</div>
 
-			<!--Search options-->
+			<!--Type options-->
 			<div class="form-group">
-				<label class="col-sm-3 control-label"></label>
+				<label class="col-sm-3 control-label">Walker Status</label>
 				<div class="col-sm-6">
 
 					<!-- All users-->
-					<input name="option" type="radio">&nbsp All Users</input>
+					<input name="type" type="radio" value="all" checked='checked'>&nbsp All Users</input>
 					&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 			
 					<!-- All Cat-Walkers-->
-					<input name="option" type="radio">&nbsp All Cat-Walkers</input>
+					<input name="type" type="radio" value="walkers">&nbsp All Cat-Walkers</input>
 					&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 				
 					<!-- All Non-Cat-Walkers-->
-					<input name="option" type="radio" class="form-control">&nbsp All Non-Cat-Walkers</input>
+					<input name="type" type="radio" value="nonwalkers">&nbsp All Non-Cat-Walkers</input>
+				</div>
+			</div>
+
+			<!-- Rating options -->
+			<div class="form-group">
+				<label class="col-sm-3 control-label">Rating</label>
+				
+				<div class="col-sm-2">
+					
+					<!-- Include rating-->
+					<input name="includeratings" type="checkbox" "Checked"> Include ratings</input>
+				</div>				
+				<div class="col-sm-2">
+
+					<!-- Minimum rating-->
+					Minimum: 
+					<select name="minrating">
+						<% for (i = 1; i <=5; i++) {%>
+							<option value="<%=i%>"><%=i%></option>
+						<%}%>
+					</select>
+				</div>
+				<div class="col-sm-2">
+
+					<!-- maximum rating-->
+					Maximum: 
+					<select name="maxrating">
+						<% for (i = 1; i <=5; i++) {%>
+							<option value="<%=i%>"><%=i%></option>
+						<%}%>
+					</select>
 				</div>
 			</div>
 		</form>

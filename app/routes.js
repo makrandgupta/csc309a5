@@ -1,41 +1,14 @@
-/**
- * Created by makrand on 11/23/15.
- */
-/**
- * Main application routes
- */
-
 'use strict';
 
-// router middleware to make sure user is logged in
-function isLoggedIn(req, res, next) {
-
-    // if user is authenticated in the session, carry on
-    if (req.isAuthenticated())
-        return next();
-
-    // if they aren't redirect them to the home page
-    res.redirect('/');
-}
-
 module.exports = function(app, passport) {
-
     app.get('/', function(req, res) {
-
-        if(isLoggedIn){
-            // console.log("I'm Logged in Mofo!");
-            res.render('index.ejs', {
-                me: req.user
-            });
-        } else {
-            res.render('index.ejs', {
-            }); // load the index.ejs file
-        }
+        if (req.isAuthenticated()) return res.redirect('/users');
+        
+        res.render('index.ejs');
     });
 
     //login route
     app.get('/login', function(req, res) {
-
         // render the page and pass in any flash data if it exists
         res.render('login.ejs', {
             message: req.flash('loginMessage')
@@ -51,7 +24,6 @@ module.exports = function(app, passport) {
 
     // show the signup form
     app.get('/signup', function(req, res) {
-
         // render the page and pass in any flash data if it exists
         res.render('signup.ejs', {
             message: req.flash('signupMessage')
@@ -65,21 +37,33 @@ module.exports = function(app, passport) {
         failureFlash : true // allow flash messages
     }));
 
+    // route for facebook authentication and login
+    app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
+
+    // handle the callback after facebook has authenticated the user
+    app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+        successRedirect: '/',
+        failureRedirect: '/'
+    }));
+
     //logout
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
     });
 
-    // Insert routes below
-    //app.use('/rentals', require('./api/rental'));
-    //app.use('/reservation-requests', require('./api/reservation-request'));
-    //app.use('/products', require('./api/product'));
-    //app.use('/things', require('./api/thing'));
-    app.use('/users', isLoggedIn, require('./api/user'));
+    // Insert routes below.
     app.use('/misc', isLoggedIn, require('./api/misc'));
+    app.use('/users', isLoggedIn, require('./api/user'));
     app.use('/cats', isLoggedIn, require('./api/cat'));
     app.use('/messages', isLoggedIn, require('./api/message'));
-
-    //app.use('/auth', require('./auth'));
 };
+
+// router middleware to make sure user is logged in
+function isLoggedIn(req, res, next) {
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated()) return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}

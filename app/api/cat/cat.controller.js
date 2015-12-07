@@ -1,5 +1,3 @@
-// /app/api/cat/cat.controller.js
-
 'use strict';
 
 var User = require('../../models/user.js');
@@ -52,6 +50,38 @@ exports.deleteCat = function(req, res) {
     });
 };
 
+/*
+* Get search page
+* */
+exports.search = function(req, res) {
+    res.render('searchcat.ejs', {
+        me: req.user,
+    });
+};
+
+/*
+* Search results
+* */
+exports.searchResults = function (req, res) {
+    var query = {"name": {$regex: req.body.name, $options: "i"}};
+    
+    if (req.body.walker && req.body.walker == 'needsWalker') {
+        query.needsWalker = true;
+    }
+    
+    if (req.body.includeage) {
+		query['age'] = {$gte: Number(req.body.minage), $lte: Number(req.body.maxage)};
+	}
+	
+    Cat.find(query, function(err, cats) {
+        res.render('catresult.ejs',{
+            me: req.user,
+            cats: cats,
+            message : 'Search Results for Cats'
+        });
+    });
+};
+
 // Create a new cat given a user id, and redirect to 'edit cat' page.
 exports.newCat = function(req, res) {
     User.findById(req.params.userid, function(err, user) {
@@ -86,7 +116,7 @@ exports.updateCat = function(req, res) {
         if (err) res.send(err);
 
         if (req.body.name) cat.name = req.body.name;
-        if (req.body.age) cat.age = req.body.age;
+        if (req.body.age && !isNaN(req.body.age)) cat.age = req.body.age;
         if (req.body.weight) cat.weight = req.body.weight;
         if (req.body.color) cat.color = req.body.color;
         if (req.body.breed) cat.breed = req.body.breed;

@@ -3,6 +3,7 @@
 var User = require('../../models/user.js');
 var Cat = require('../../models/cat.js');
 var Comment = require('../../models/comment.js');
+var Recommendation = require('../misc/recommendation.js');
 
 var fs = require('fs');
 
@@ -31,7 +32,7 @@ exports.me = function (req, res) {
 
         Comment.find({'_id': { $in: req.user.comments}}, function(err, comments) {
             if(err) return res.send(err);
-        	    
+
         	res.render('profile.ejs', {
         	    me : req.user, // get the user out of session and pass to template
                 viewUser : req.user,
@@ -60,16 +61,42 @@ exports.editMe = function (req, res) {
 exports.search = function (req, res) {
 	res.render('search.ejs', {
 		me: req.user,
-		editUser: req.user
 	});
 };
 
 /*
-* Search results.
+* Search user results.
 * */
 
 exports.searchResults = function (req, res) {
-	res.end();
+	var displayName = req.body['displayName'];
+	var type = req.body['type'];
+	var userTypeHasher = {
+			walkers: true,
+			nonwalkers: false
+	}
+	var query = {'displayName' : { $regex: displayName, $options: 'i' }};
+	
+	if (type != 'all') {
+		query['isCatWalker'] = userTypeHasher[type];
+	}
+		
+	if (req.body.includeratings) {
+		query['rating'] = {$gte: Number(req.body.minrating), $lte: Number(req.body.maxrating)};
+	}
+
+	User.find(query).lean().exec(function(err, results) {
+		if (err) {
+			return res.send(err);
+		}
+		
+		Recommendation.computeUserRecommendations(req.user, results);
+		res.render('home.ejs', {
+            users : results,
+            me : req.user,
+            message : 'Search Results for Users'
+        });
+	});
 };
 
 /*
@@ -83,15 +110,38 @@ exports.singleUser = function (req, res) {
 		Cat.find({'_id': { $in: user.cats}}, function(err, cats) {
 			if(err) return res.send(err);
 
-            Comment.find({'_id': { $in: user.comments}}, function(err, comments) {
-                if(err) return res.send(err);
+			User.find({}).lean().exec(function(err, results) {
+				if (err) return res.send(err);
+		
+				Recommendation.computeUserRecommendations(user, results);
+				var similarUsers = [];
+				var i = 0;
+				
+				// Up to 4 users with rIndices < 10 are listed as similar on a profile.
+				while (i <= results.length - 1) {
+					var otherUser = results[i];
+					console.log(otherUser);
+
+					if (similarUsers.length <= 3 && otherUser['rIndex'] < 10) {
+						similarUsers.push(otherUser);
+						i = i + 1;
+					}
+					else {
+						i = results.length;
+					}
+				}
+
+				Comment.find({'_id': { $in: user.comments}}, function(err, comments) {
+					if(err) return res.send(err);
     	    
-    			res.render('profile.ejs', {
-        			viewUser: user,
-        			me : req.user,
-        			cats: cats,
-                    comments: comments,
-    			});
+					res.render('profile.ejs', {
+						viewUser: user,
+						me : req.user,
+						cats: cats,
+						similarUsers: similarUsers,
+						comments: comments
+					});
+				});
             });
         });
     });
@@ -109,7 +159,6 @@ exports.editUser = function (req, res) {
             me: req.user,
             editUser: user
         });
-
     });
 };
 

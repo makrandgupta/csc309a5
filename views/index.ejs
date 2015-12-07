@@ -1,29 +1,28 @@
-<!-- views/index.ejs -->
 <!doctype html>
 <html>
 <head>
-	<% include partials/head %>
+    <% include partials/head %>
 </head>
 <body>
 <div class="container">
-	<header>
-		<% include partials/header %>
-	</header>
-	<% if(typeof me !== "undefined"){%>
-		<div class="jumbotron text-center">
-			<h1>Welcome!</h1>
-			<p>You are already logged in!</p>
-			<p>Click below to continue</p>
-			<a href="/users" class="btn btn-default">Home</a>
-		</div>
-	<%} else {%>
-		<div class="jumbotron text-center">
-			<h1><span class="fa fa-lock"></span></h1>
+    <header>
+        <% include partials/header %>
+    </header>
 
-			<a href="/login" class="btn btn-default">Login</a>
-			<a href="/signup" class="btn btn-default">Signup</a>
-		</div>
-	<%}%>
+    <div class="jumbotron text-center">
+        <h1><span class="fa fa-lock"></span></h1>
+
+        <a href="/login" class="btn btn-default">Login</a>
+        <a href="/signup" class="btn btn-default">Signup</a>
+
+        <br/><br/><br/><br/>
+
+        <p>Or, login or register with:</p>
+        <a href="/auth/facebook" class="btn btn-primary">
+            <span class="fa fa-facebook"></span>
+            Facebook
+        </a>
+    </div>
 </div>
 </body>
 </html>
